@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <rect width="1200" height="675" fill="#0f172a"/>
+  <rect x="60" y="60" width="1080" height="555" rx="16" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="600" y="280" text-anchor="middle" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="48" font-weight="700">Lambda Annotate</text>
+  <text x="600" y="340" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="24">Structured Annotation Platform</text>
+  <rect x="200" y="400" width="800" height="140" rx="8" fill="#451a03" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="230" y="430" width="120" height="80" rx="4" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="1"/>
+  <rect x="370" y="430" width="120" height="80" rx="4" fill="#f59e0b" opacity="0.3" stroke="#f59e0b" stroke-width="1"/>
+  <rect x="510" y="430" width="120" height="80" rx="4" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="1"/>
+  <rect x="650" y="430" width="120" height="80" rx="4" fill="#f59e0b" opacity="0.4" stroke="#f59e0b" stroke-width="1"/>
+  <rect x="790" y="430" width="120" height="80" rx="4" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="1"/>
+</svg>
