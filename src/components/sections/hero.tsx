@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Download, Github, Linkedin, Mail, ArrowDown } from "lucide-react";
+import { Download, Mail, ArrowDown } from "lucide-react";
+import { GitHubIcon, LinkedInIcon } from "@/components/icons/social";
 import { personalInfo } from "@/data/personal";
 import { Button } from "@/components/ui/button";
 
@@ -96,7 +97,7 @@ export function Hero() {
             className="rounded-full border border-border/50 bg-background/50 p-3 text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/50 hover:text-primary"
             aria-label="GitHub profile"
           >
-            <Github className="h-5 w-5" />
+            <GitHubIcon />
           </Link>
           <Link
             href={personalInfo.linkedin}
@@ -105,7 +106,7 @@ export function Hero() {
             className="rounded-full border border-border/50 bg-background/50 p-3 text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/50 hover:text-primary"
             aria-label="LinkedIn profile"
           >
-            <Linkedin className="h-5 w-5" />
+            <LinkedInIcon />
           </Link>
           <Link
             href={`mailto:${personalInfo.email}`}

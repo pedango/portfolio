@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import { GitHubIcon, LinkedInIcon } from "@/components/icons/social";
 import { personalInfo } from "@/data/personal";
 import { Separator } from "@/components/ui/separator";
 
@@ -25,7 +26,7 @@ export function Footer() {
               className="text-muted-foreground transition-colors hover:text-foreground"
               aria-label="GitHub profile"
             >
-              <Github className="h-5 w-5" />
+              <GitHubIcon />
             </Link>
             <Link
               href={personalInfo.linkedin}
@@ -34,7 +35,7 @@ export function Footer() {
               className="text-muted-foreground transition-colors hover:text-foreground"
               aria-label="LinkedIn profile"
             >
-              <Linkedin className="h-5 w-5" />
+              <LinkedInIcon />
             </Link>
             <Link
               href={`mailto:${personalInfo.email}`}

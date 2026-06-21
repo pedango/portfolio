@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { GitHubIcon, LinkedInIcon } from "@/components/icons/social";
 import { personalInfo } from "@/data/personal";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -26,13 +27,13 @@ const contactLinks = [
     href: `tel:${personalInfo.phone}`,
   },
   {
-    icon: Linkedin,
+    icon: LinkedInIcon,
     label: "LinkedIn",
     value: "peter-dango",
     href: personalInfo.linkedin,
   },
   {
-    icon: Github,
+    icon: GitHubIcon,
     label: "GitHub",
     value: personalInfo.githubUsername,
     href: personalInfo.github,
