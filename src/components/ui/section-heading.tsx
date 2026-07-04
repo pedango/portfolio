@@ -14,7 +14,7 @@ export function SectionHeading({
   id,
 }: SectionHeadingProps) {
   return (
-    <div className={cn("mb-12 text-center", className)}>
+    <div className={cn("mb-8 flex flex-col items-center text-center", className)}>
       <h2
         id={id}
         className="text-3xl font-bold tracking-tight sm:text-4xl"
@@ -22,11 +22,14 @@ export function SectionHeading({
         {title}
       </h2>
       {subtitle && (
-        <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+        <p className="mx-auto mt-3 max-w-2xl text-base text-muted-foreground">
           {subtitle}
         </p>
       )}
-      <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-primary" />
+      <div
+        className="mt-3 h-1 w-16 shrink-0 rounded-full bg-primary"
+        aria-hidden="true"
+      />
     </div>
   );
 }

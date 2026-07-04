@@ -24,9 +24,9 @@ export function AnimatedSection({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={cn("py-20 sm:py-24", className)}
+      className={cn("pt-14 pb-10 sm:pt-16 sm:pb-12", className)}
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">{children}</div>
+      <div className="mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8">{children}</div>
     </motion.section>
   );
 }

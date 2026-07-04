@@ -7,9 +7,11 @@ import {
   ExternalLink,
   Layers,
   Lightbulb,
+  Play,
   Star,
 } from "lucide-react";
 import { getProjectBySlug, getAllProjectSlugs } from "@/data/projects";
+import { getGoogleDriveEmbedUrl } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -67,6 +69,53 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           />
         </div>
 
+        {project.screenshots && project.screenshots.length > 1 && (
+          <div className="mb-8 grid gap-4 sm:grid-cols-2">
+            {project.screenshots.slice(1).map((screenshot) => (
+              <div
+                key={screenshot.src}
+                className="relative aspect-video overflow-hidden rounded-xl border border-border/50"
+              >
+                <Image
+                  src={screenshot.src}
+                  alt={screenshot.alt}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 640px) 100vw, 432px"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {project.demoVideoUrl && (
+          <div className="mb-8">
+            <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
+              <Play className="h-5 w-5 text-primary" />
+              Demo Video
+            </h2>
+            <div className="relative aspect-video overflow-hidden rounded-2xl border border-border/50 bg-muted">
+              <iframe
+                src={getGoogleDriveEmbedUrl(project.demoVideoUrl)}
+                title={`${project.title} demo video`}
+                allow="autoplay; fullscreen"
+                allowFullScreen
+                className="absolute inset-0 h-full w-full"
+              />
+            </div>
+            <Button asChild variant="outline" size="sm" className="mt-3">
+              <Link
+                href={project.demoVideoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink className="h-4 w-4" />
+                Open in Google Drive
+              </Link>
+            </Button>
+          </div>
+        )}
+
         <div className="mb-4 flex flex-wrap items-center gap-2">
           <Badge variant="outline">{project.type}</Badge>
           {project.featured && (
@@ -74,6 +123,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <Star className="mr-1 h-3 w-3" />
               Featured
             </Badge>
+          )}
+          {project.status === "Ongoing" && (
+            <Badge variant="secondary">Ongoing</Badge>
           )}
         </div>
 

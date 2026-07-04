@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { skillCategories } from "@/data/skills";
+import { cn } from "@/lib/utils";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Badge } from "@/components/ui/badge";
@@ -35,9 +36,10 @@ export function Skills() {
         subtitle="Technologies and competencies across the full development lifecycle"
       />
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {skillCategories.map((category, index) => {
           const Icon = iconMap[category.icon] || Code2;
+          const isFullWidth = category.title === "Professional Skills";
           return (
             <motion.div
               key={category.title}
@@ -45,15 +47,19 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
+              className={cn(
+                "flex",
+                isFullWidth ? "sm:col-span-2 lg:col-span-3" : undefined
+              )}
             >
-              <Card className="group h-full transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-                <CardHeader className="pb-3">
+              <Card className="group flex h-full w-full min-h-[220px] flex-col transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+                <CardHeader className="p-6 pb-3">
                   <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
                     <Icon className="h-5 w-5" />
                   </div>
                   <CardTitle className="text-lg">{category.title}</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex flex-1 flex-col p-6 pt-0">
                   <div className="flex flex-wrap gap-2">
                     {category.skills.map((skill) => (
                       <Badge key={skill} variant="tech">

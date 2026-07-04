@@ -6,6 +6,8 @@ const PRIORITY_REPOS = [
   "skillswap",
   "gps-police-management",
   "lambda-annotate",
+  "fhm-meet",
+  "FHM-Meet",
   "lambda-lms",
   "Lambda-LMS",
   "SkillSwap",
@@ -76,9 +78,9 @@ function getFallbackRepos(): GitHubRepo[] {
     },
     {
       id: 3,
-      name: "GPS-Police-Management",
+      name: "GPS-Staff-Management",
       description:
-        "Personnel management platform for police officer records and assignments.",
+        "Staff management platform for the Ghana Police Service Eastern North Region.",
       html_url: personalInfo.github,
       stargazers_count: 0,
       language: "TypeScript",

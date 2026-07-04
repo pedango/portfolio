@@ -24,7 +24,7 @@ export function Projects() {
         subtitle="Real-world applications built for education, community, and public service"
       />
 
-      <div className="grid gap-8">
+      <div className="grid gap-6">
         {sortedProjects.map((project, index) => (
           <motion.article
             key={project.slug}
@@ -34,8 +34,8 @@ export function Projects() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="group overflow-hidden rounded-2xl border border-border/50 bg-card/30 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5"
           >
-            <div className="grid gap-0 lg:grid-cols-2">
-              <div className="relative aspect-video overflow-hidden lg:aspect-auto">
+            <div className="grid gap-0 lg:grid-cols-2 lg:items-stretch">
+              <div className="relative aspect-video min-h-[220px] overflow-hidden lg:aspect-auto lg:min-h-[320px]">
                 <Image
                   src={project.image}
                   alt={`${project.title} project screenshot`}
@@ -46,18 +46,28 @@ export function Projects() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent lg:bg-gradient-to-r" />
                 {project.featured && (
-                  <div className="absolute left-4 top-4">
+                  <div className="absolute left-4 top-4 flex flex-wrap gap-2">
                     <Badge className="bg-primary text-primary-foreground">
                       <Star className="mr-1 h-3 w-3" />
                       Featured
                     </Badge>
                   </div>
                 )}
+                {project.status === "Ongoing" && (
+                  <div
+                    className={`absolute ${project.featured ? "left-4 top-14" : "left-4 top-4"}`}
+                  >
+                    <Badge variant="secondary">Ongoing</Badge>
+                  </div>
+                )}
               </div>
 
-              <div className="flex flex-col justify-center p-6 sm:p-8">
-                <div className="mb-2 flex items-center gap-2">
+              <div className="flex min-h-full flex-col justify-center p-6 sm:p-8">
+                <div className="mb-2 flex flex-wrap items-center gap-2">
                   <Badge variant="outline">{project.type}</Badge>
+                  {project.status === "Ongoing" && (
+                    <Badge variant="secondary">Ongoing</Badge>
+                  )}
                 </div>
 
                 <h3 className="text-2xl font-bold tracking-tight">
@@ -81,7 +91,7 @@ export function Projects() {
                   )}
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-4 flex flex-wrap items-center gap-3">
                   <Button asChild>
                     <Link href={`/projects/${project.slug}`}>
                       View Details

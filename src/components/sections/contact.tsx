@@ -118,8 +118,8 @@ export function Contact() {
                 <Send className="mb-4 h-12 w-12 text-primary" />
                 <h3 className="text-xl font-semibold">Thank you!</h3>
                 <p className="mt-2 text-muted-foreground">
-                  Your email client should open shortly. I look forward to
-                  connecting with you.
+                  Your email app should open with the message addressed to{" "}
+                  {personalInfo.email}. I will reply from my inbox.
                 </p>
                 <Button
                   variant="outline"
@@ -166,6 +166,11 @@ export function Contact() {
                   <Send className="h-4 w-4" />
                   Send Message
                 </Button>
+                <p className="text-center text-sm text-muted-foreground">
+                  This opens your email app and sends the message to{" "}
+                  {personalInfo.email}. I read and reply from that inbox — there
+                  is no separate dashboard on this site.
+                </p>
               </form>
             )}
           </CardContent>

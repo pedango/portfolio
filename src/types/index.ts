@@ -8,7 +8,10 @@ export interface Project {
   technologies: string[];
   githubUrl?: string;
   featured?: boolean;
+  status?: "Ongoing";
   image: string;
+  screenshots?: { src: string; alt: string }[];
+  demoVideoUrl?: string;
   architecture: string[];
   features: string[];
   lessonsLearned: string[];
@@ -19,6 +22,19 @@ export interface Experience {
   company: string;
   period: string;
   responsibilities: string[];
+}
+
+export interface LeadershipEntry {
+  title: string;
+  organization: string;
+  period?: string;
+  highlights: string[];
+}
+
+export interface EducationEntry {
+  title: string;
+  school: string;
+  period: string;
 }
 
 export interface SkillCategory {

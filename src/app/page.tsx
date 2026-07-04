@@ -8,7 +8,7 @@ import { Experience } from "@/components/sections/experience";
 const GitHubSection = dynamic(
   () =>
     import("@/components/sections/github").then((mod) => mod.GitHubSection),
-  { loading: () => <div className="py-20 text-center text-muted-foreground">Loading repositories...</div> }
+  { loading: () => <div className="py-12 text-center text-muted-foreground">Loading repositories...</div> }
 );
 
 const Contact = dynamic(

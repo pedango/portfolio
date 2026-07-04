@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Download, Mail, ArrowDown } from "lucide-react";
@@ -37,16 +38,29 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-16"
+      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden pt-16"
     >
       <AnimatedBackground />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 text-center sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-[1100px] px-4 py-12 text-center sm:px-6 sm:py-16 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
+          <div className="mx-auto mb-6 flex justify-center">
+            <div className="relative h-32 w-32 overflow-hidden rounded-full border-4 border-primary/20 bg-muted shadow-xl shadow-primary/10 sm:h-40 sm:w-40">
+              <Image
+                src={personalInfo.portraitPath}
+                alt={personalInfo.name}
+                fill
+                className="object-cover object-top"
+                priority
+                sizes="(max-width: 640px) 128px, 160px"
+              />
+            </div>
+          </div>
+
           <p className="mb-4 text-sm font-medium uppercase tracking-widest text-primary">
             {personalInfo.location}
           </p>
@@ -68,18 +82,28 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4"
         >
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="h-12 min-h-12 min-w-[11rem] px-6">
             <Link href="#projects">View Projects</Link>
           </Button>
-          <Button asChild variant="outline" size="lg">
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="h-12 min-h-12 min-w-[11rem] border-border px-6"
+          >
             <a href={personalInfo.cvPath} download>
               <Download className="h-4 w-4" />
               Download CV
             </a>
           </Button>
-          <Button asChild variant="glass" size="lg">
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="h-12 min-h-12 min-w-[11rem] border-border bg-white/5 px-6 backdrop-blur-md"
+          >
             <Link href="#contact">Contact Me</Link>
           </Button>
         </motion.div>
@@ -88,7 +112,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-10 flex items-center justify-center gap-4"
+          className="mt-5 flex items-center justify-center gap-4"
         >
           <Link
             href={personalInfo.github}
@@ -121,11 +145,11 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16"
+          className="mt-8"
         >
           <Link
             href="#about"
-            className="inline-flex flex-col items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex flex-col items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
             aria-label="Scroll to about section"
           >
             <span>Learn more</span>

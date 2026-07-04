@@ -18,13 +18,13 @@ export async function GitHubSection() {
         subtitle="Repositories and contributions on GitHub"
       />
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {repos.map((repo) => (
           <Card
             key={repo.id}
             className="flex flex-col transition-all duration-300 hover:border-primary/30 hover:shadow-lg"
           >
-            <CardHeader className="pb-3">
+            <CardHeader className="p-6 pb-3">
               <div className="flex items-start justify-between gap-2">
                 <CardTitle className="text-lg">
                   <Link
@@ -45,16 +45,18 @@ export async function GitHubSection() {
                 </p>
               )}
             </CardHeader>
-            <CardContent className="mt-auto">
-              <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+            <CardContent className="mt-auto px-6 pb-6 pt-0">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
                 {repo.language && (
-                  <Badge variant="tech">{repo.language}</Badge>
+                  <Badge variant="tech" className="shrink-0">
+                    {repo.language}
+                  </Badge>
                 )}
-                <span className="inline-flex items-center gap-1">
+                <span className="inline-flex shrink-0 items-center gap-1 leading-none">
                   <Star className="h-3.5 w-3.5" />
                   {repo.stargazers_count}
                 </span>
-                <span>{formatRelativeDate(repo.updated_at)}</span>
+                <span className="leading-none">{formatRelativeDate(repo.updated_at)}</span>
               </div>
             </CardContent>
           </Card>

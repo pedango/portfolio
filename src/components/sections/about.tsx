@@ -1,4 +1,5 @@
-import { aboutContent } from "@/data/personal";
+import Image from "next/image";
+import { aboutContent, personalInfo } from "@/data/personal";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Badge } from "@/components/ui/badge";
@@ -11,8 +12,8 @@ export function About() {
         subtitle="Computer Science graduate passionate about building software that makes a difference"
       />
 
-      <div className="grid gap-12 lg:grid-cols-5">
-        <div className="space-y-6 lg:col-span-3">
+      <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-10">
+        <div className="space-y-5">
           {aboutContent.paragraphs.map((paragraph, index) => (
             <p
               key={index}
@@ -23,8 +24,18 @@ export function About() {
           ))}
         </div>
 
-        <div className="lg:col-span-2">
-          <div className="rounded-xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm">
+        <div className="flex flex-col items-stretch gap-6">
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-border/50 shadow-lg">
+            <Image
+              src={personalInfo.portraitPath}
+              alt={personalInfo.name}
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 1024px) 100vw, 520px"
+            />
+          </div>
+
+          <div className="rounded-xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm">
             <h3 className="mb-4 text-lg font-semibold">Core Strengths</h3>
             <div className="flex flex-wrap gap-2">
               {aboutContent.highlights.map((highlight) => (
@@ -34,8 +45,8 @@ export function About() {
               ))}
             </div>
 
-            <div className="mt-8 space-y-4">
-              <div className="rounded-lg border border-border/30 bg-background/50 p-4">
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-lg border border-border/30 bg-background/50 p-5">
                 <p className="text-sm font-medium text-foreground">
                   Security & Quality
                 </p>
@@ -44,7 +55,7 @@ export function About() {
                   JMeter for performance testing.
                 </p>
               </div>
-              <div className="rounded-lg border border-border/30 bg-background/50 p-4">
+              <div className="rounded-lg border border-border/30 bg-background/50 p-5">
                 <p className="text-sm font-medium text-foreground">
                   Education Focus
                 </p>

@@ -44,7 +44,7 @@ export function Header() {
       )}
     >
       <nav
-        className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8"
+        className="mx-auto flex h-16 max-w-[1100px] items-center justify-between px-4 sm:px-6 lg:px-8"
         aria-label="Main navigation"
       >
         <Link

@@ -4,7 +4,7 @@ export const siteConfig = {
   name: personalInfo.name,
   title: `${personalInfo.name} | Full Stack Developer Portfolio`,
   description:
-    "Portfolio of Dango Edem Peter — Computer Science Graduate and Full Stack Developer specializing in educational technology, secure web applications, and community-focused software solutions.",
+    "Portfolio of Dango Edem Peter — Full-Stack Software Developer building educational technology, secure web applications, and community-focused software solutions.",
   url: personalInfo.siteUrl,
   ogImage: "/assets/og-image.svg",
   keywords: [
@@ -20,6 +20,9 @@ export const siteConfig = {
     "Accra",
     "Lambda LMS",
     "SkillSwap",
+    "Lambda Annotate",
+    "Ghana Police Service",
+    "FHM-Meet",
   ],
   author: personalInfo.name,
   twitterHandle: "@pedango",
@@ -30,7 +33,7 @@ export function generatePersonJsonLd() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: personalInfo.name,
-    jobTitle: "Full Stack Developer",
+    jobTitle: "Full-Stack Software Developer",
     description: personalInfo.tagline,
     email: personalInfo.email,
     telephone: personalInfo.phone,
@@ -41,6 +44,7 @@ export function generatePersonJsonLd() {
     },
     url: siteConfig.url,
     sameAs: [personalInfo.linkedin, personalInfo.github],
+    image: `${siteConfig.url}${personalInfo.portraitPath}`,
     knowsAbout: [
       "JavaScript",
       "TypeScript",

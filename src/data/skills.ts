@@ -14,12 +14,12 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Backend",
     icon: "Server",
-    skills: ["Node.js", "REST APIs", "JWT Authentication"],
+    skills: ["Node.js", "REST APIs", "JWT Authentication", "WebRTC (LiveKit)"],
   },
   {
     title: "Databases",
     icon: "Database",
-    skills: ["MySQL", "PostgreSQL"],
+    skills: ["MySQL", "PostgreSQL", "Prisma", "Supabase"],
   },
   {
     title: "Testing & Security",
@@ -29,7 +29,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Tools",
     icon: "Wrench",
-    skills: ["Git", "GitHub", "VS Code"],
+    skills: ["Git", "GitHub", "VS Code", "Clerk"],
   },
   {
     title: "Professional Skills",
@@ -37,9 +37,9 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       "Project Coordination",
       "Team Collaboration",
-      "Communication",
       "Stakeholder Engagement",
       "Problem Solving",
+      "User Support",
       "Technical Documentation",
     ],
   },
