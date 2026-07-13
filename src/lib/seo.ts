@@ -23,6 +23,7 @@ export const siteConfig = {
     "Lambda Annotate",
     "Ghana Police Service",
     "FHM-Meet",
+    "Digi-Receipt",
   ],
   author: personalInfo.name,
   twitterHandle: "@pedango",

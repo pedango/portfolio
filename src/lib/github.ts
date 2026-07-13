@@ -6,8 +6,10 @@ const PRIORITY_REPOS = [
   "skillswap",
   "gps-police-management",
   "lambda-annotate",
+  "digi-receipt",
   "fhm-meet",
   "FHM-Meet",
+  "Digi-Receipt",
   "lambda-lms",
   "Lambda-LMS",
   "SkillSwap",
@@ -91,6 +93,26 @@ function getFallbackRepos(): GitHubRepo[] {
       name: "Lambda-Annotate",
       description:
         "Web-based annotation platform for structured annotation workflows.",
+      html_url: personalInfo.github,
+      stargazers_count: 0,
+      language: "TypeScript",
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: 5,
+      name: "Digi-Receipt",
+      description:
+        "Donation e-receipt system with donor lists and PDF certificate download.",
+      html_url: personalInfo.github,
+      stargazers_count: 0,
+      language: "TypeScript",
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: 6,
+      name: "FHM-Meet",
+      description:
+        "Video conferencing app with link-based meetings and guest join.",
       html_url: personalInfo.github,
       stargazers_count: 0,
       language: "TypeScript",

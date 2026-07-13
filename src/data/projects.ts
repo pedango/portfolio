@@ -312,12 +312,93 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "digi-receipt",
+    title: "Digi-Receipt",
+    type: "Independent Project",
+    description:
+      "Donation e-receipt system for recording contributions, generating printable certificates, and exporting donor records for events such as condolence donations.",
+    shortDescription:
+      "Event donation tracker with instant e-receipts, donor lists, and CSV export.",
+    contributions: [
+      "Built a donation recording and e-receipt generation workflow for event organizers",
+      "Implemented donor list management with search, totals, and CSV export",
+      "Designed configurable event details that appear on every generated receipt",
+      "Delivered PDF and text download options for sharing certificates with donors",
+    ],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+    ],
+    githubUrl: "https://github.com/pedango",
+    image: "/assets/projects/digi-receipt/home.png",
+    demoVideoUrl:
+      "https://drive.google.com/file/d/12k-U_V8xOyYVy5vHmdtttl-gYBQWsfzR/view?usp=drivesdk",
+    screenshots: [
+      {
+        src: "/assets/projects/digi-receipt/home.png",
+        alt: "Digi-Receipt home with Record Donation, Donor List, and Event Details tabs",
+      },
+      {
+        src: "/assets/projects/digi-receipt/recordDonation.png",
+        alt: "Record a donation form with donor name, phone, amount, and reason fields",
+      },
+      {
+        src: "/assets/projects/digi-receipt/recordDonation2.png",
+        alt: "Filled donation form ready to save and generate a receipt",
+      },
+      {
+        src: "/assets/projects/digi-receipt/generatedReceipt1.png",
+        alt: "Generated certificate of condolence donation with PDF and text download",
+      },
+      {
+        src: "/assets/projects/digi-receipt/generatedReceipt2.png",
+        alt: "Digital receipt card showing donor details and amount donated",
+      },
+      {
+        src: "/assets/projects/digi-receipt/donorlist1.png",
+        alt: "Donor list empty state with donation totals and CSV export",
+      },
+      {
+        src: "/assets/projects/digi-receipt/donorList2.png",
+        alt: "Donor list table with receipt number, amount, and delete actions",
+      },
+      {
+        src: "/assets/projects/digi-receipt/donorList3.png",
+        alt: "Donor list showing search and recorded donation entries",
+      },
+      {
+        src: "/assets/projects/digi-receipt/eventDetails.png",
+        alt: "Event details form for name and date shown on generated receipts",
+      },
+    ],
+    architecture: [
+      "Next.js application with tabbed workflows for donations, donors, and events",
+      "Client-side receipt generation with PDF and plain-text download options",
+      "Donor registry with search, running totals, and CSV export",
+      "Event configuration that stamps every newly generated receipt",
+    ],
+    features: [
+      "Record donations with donor name, phone, amount, and optional reason",
+      "Instant certificate-style e-receipts with PDF and text download",
+      "Donor list with search, totals, and CSV export",
+      "Configurable event name and date for receipt branding",
+      "Receipt numbering and timestamped donation history",
+    ],
+    lessonsLearned: [
+      "Event organizers need a short path from recording a gift to handing over a receipt",
+      "Exportable donor records matter as much as the receipt itself for reconciliation",
+      "Clear empty states and running totals build trust in donation workflows",
+      "Configurable event headers keep one app reusable across many occasions",
+    ],
+  },
+  {
     slug: "fhm-meet",
     title: "FHM-Meet",
     type: "Independent Project",
     status: "Ongoing",
     description:
-      "Zoom and Google Meet-style video conferencing web app with instant link-based meeting access and frictionless guest join.",
+      "Zoom and Google Meet-style video conferencing web app for Flare Healing Ministries, with instant link-based meeting access and frictionless guest join.",
     shortDescription:
       "WebRTC video conferencing app with link-based meetings and guest join — in active development.",
     contributions: [
@@ -335,7 +416,39 @@ export const projects: Project[] = [
       "Prisma",
       "Tailwind CSS",
     ],
-    image: "/assets/projects/fhm-meet.svg",
+    image: "/assets/projects/fhm-meet/home.png",
+    demoVideoUrl:
+      "https://drive.google.com/file/d/1uPEQgcduyhoFLvDkzAEc0MngT0G9Gf0v/view?usp=drivesdk",
+    screenshots: [
+      {
+        src: "/assets/projects/fhm-meet/home.png",
+        alt: "FHM-Meet dashboard with new meeting, join, and recent meetings",
+      },
+      {
+        src: "/assets/projects/fhm-meet/login.png",
+        alt: "Sign in to Flare Healing Ministries with Google, GitHub, or email via Clerk",
+      },
+      {
+        src: "/assets/projects/fhm-meet/creatingMeeting.png",
+        alt: "Start a new meeting modal with title input and create and join action",
+      },
+      {
+        src: "/assets/projects/fhm-meet/meetingCreated.png",
+        alt: "Pre-join lobby with camera preview and Join Now button",
+      },
+      {
+        src: "/assets/projects/fhm-meet/participants.png",
+        alt: "In-call view with host and guest participants panel",
+      },
+      {
+        src: "/assets/projects/fhm-meet/meetingChat.png",
+        alt: "In-call messages sidebar during an active video meeting",
+      },
+      {
+        src: "/assets/projects/fhm-meet/screenSharing.png",
+        alt: "Browser screen sharing active to an FHM-Meet session",
+      },
+    ],
     architecture: [
       "Next.js application with link-based meeting rooms",
       "LiveKit SFU for scalable multi-participant WebRTC sessions",
