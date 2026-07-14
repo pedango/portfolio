@@ -5,6 +5,7 @@ import {
   ArrowLeft,
   CheckCircle2,
   ExternalLink,
+  ImageIcon,
   Layers,
   Lightbulb,
   Play,
@@ -50,6 +51,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   if (!project) notFound();
 
+  const galleryScreenshots =
+    project.screenshots?.filter((shot) => shot.src !== project.image) ?? [];
+
   return (
     <article className="min-h-screen pt-24 pb-20">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -60,6 +64,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </Link>
         </Button>
 
+        {/* 1. Hero image */}
         <div className="relative mb-8 aspect-video overflow-hidden rounded-2xl border border-border/50">
           <Image
             src={project.image}
@@ -71,53 +76,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           />
         </div>
 
-        {project.screenshots && project.screenshots.length > 1 && (
-          <div className="mb-8 grid gap-4 sm:grid-cols-2">
-            {project.screenshots.slice(1).map((screenshot) => (
-              <div
-                key={screenshot.src}
-                className="relative aspect-video overflow-hidden rounded-xl border border-border/50"
-              >
-                <Image
-                  src={screenshot.src}
-                  alt={screenshot.alt}
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 640px) 100vw, 432px"
-                />
-              </div>
-            ))}
-          </div>
-        )}
-
-        {project.demoVideoUrl && (
-          <div className="mb-8">
-            <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
-              <Play className="h-5 w-5 text-primary" />
-              Demo Video
-            </h2>
-            <div className="relative aspect-video overflow-hidden rounded-2xl border border-border/50 bg-muted">
-              <iframe
-                src={getGoogleDriveEmbedUrl(project.demoVideoUrl)}
-                title={`${project.title} demo video`}
-                allow="autoplay; fullscreen"
-                allowFullScreen
-                className="absolute inset-0 h-full w-full"
-              />
-            </div>
-            <Button asChild variant="outline" size="sm" className="mt-3">
-              <Link
-                href={project.demoVideoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ExternalLink className="h-4 w-4" />
-                Open in Google Drive
-              </Link>
-            </Button>
-          </div>
-        )}
-
+        {/* 2. Title + badges + intro */}
         <div className="mb-4 flex flex-wrap items-center gap-2">
           <Badge variant="outline">{project.type}</Badge>
           {project.featured && (
@@ -139,6 +98,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           {project.description}
         </p>
 
+        {/* 3. Tech stack */}
         <div className="mt-6 flex flex-wrap gap-2">
           {project.technologies.map((tech) => (
             <Badge key={tech} variant="tech">
@@ -147,6 +107,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           ))}
         </div>
 
+        {/* Primary CTA near title */}
         {project.githubUrl && (
           <Button asChild className="mt-8">
             <Link
@@ -163,6 +124,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <Separator className="my-12" />
 
         <div className="grid gap-8">
+          {/* 4–5. Problem & Solution */}
           <div className="grid gap-8 md:grid-cols-2">
             <Card>
               <CardHeader>
@@ -189,6 +151,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </Card>
           </div>
 
+          {/* 6. Contributions */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-xl">
@@ -205,22 +168,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-xl">
-                <Layers className="h-5 w-5 text-primary" />
-                Architecture
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="ml-4 list-disc space-y-2 text-muted-foreground">
-                {project.architecture.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-
+          {/* 7. Key features */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-xl">
@@ -237,6 +185,24 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </CardContent>
           </Card>
 
+          {/* 8. Architecture */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-xl">
+                <Layers className="h-5 w-5 text-primary" />
+                Architecture
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="ml-4 list-disc space-y-2 text-muted-foreground">
+                {project.architecture.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+
+          {/* 9. Lessons learned */}
           <Card className="border-primary/20 bg-primary/5">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-xl">
@@ -252,6 +218,90 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </ul>
             </CardContent>
           </Card>
+        </div>
+
+        {/* 10. Screenshots */}
+        {galleryScreenshots.length > 0 && (
+          <>
+            <Separator className="my-12" />
+            <div>
+              <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
+                <ImageIcon className="h-5 w-5 text-primary" />
+                Screenshots
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {galleryScreenshots.map((screenshot) => (
+                  <div
+                    key={screenshot.src}
+                    className="relative aspect-video overflow-hidden rounded-xl border border-border/50"
+                  >
+                    <Image
+                      src={screenshot.src}
+                      alt={screenshot.alt}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 640px) 100vw, 432px"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* 11. Demo video */}
+        {project.demoVideoUrl && (
+          <>
+            <Separator className="my-12" />
+            <div>
+              <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
+                <Play className="h-5 w-5 text-primary" />
+                Demo Video
+              </h2>
+              <div className="relative aspect-video overflow-hidden rounded-2xl border border-border/50 bg-muted">
+                <iframe
+                  src={getGoogleDriveEmbedUrl(project.demoVideoUrl)}
+                  title={`${project.title} demo video`}
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full"
+                />
+              </div>
+              <Button asChild variant="outline" size="sm" className="mt-3">
+                <Link
+                  href={project.demoVideoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  Open in Google Drive
+                </Link>
+              </Button>
+            </div>
+          </>
+        )}
+
+        {/* 12. Links at bottom */}
+        <Separator className="my-12" />
+        <div className="flex flex-wrap gap-3">
+          {project.githubUrl && (
+            <Button asChild>
+              <Link
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink className="h-4 w-4" />
+                View on GitHub
+              </Link>
+            </Button>
+          )}
+          <Button asChild variant="outline">
+            <Link href="/#projects">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Projects
+            </Link>
+          </Button>
         </div>
       </div>
     </article>
