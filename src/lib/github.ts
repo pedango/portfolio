@@ -2,12 +2,12 @@ import type { GitHubRepo } from "@/types";
 import { personalInfo } from "@/data/personal";
 
 const PRIORITY_REPOS = [
+  "gps-police",
+  "GPS-Police-Personnel-Management-System",
   "fhm-meet",
   "FHM-Meet",
   "digi-receipt",
   "Digi-Receipt",
-  "gps-police",
-  "GPS-Police-Personnel-Management-System",
   "lambda-lms",
   "Lambda-LMS",
   "lambda-annotate",
@@ -59,6 +59,16 @@ function getFallbackRepos(): GitHubRepo[] {
   return [
     {
       id: 1,
+      name: "GPS-Staff-Management",
+      description:
+        "Staff management platform for the Ghana Police Service Eastern North Region.",
+      html_url: personalInfo.github,
+      stargazers_count: 0,
+      language: "TypeScript",
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: 2,
       name: "FHM-Meet",
       description:
         "Video conferencing app with link-based meetings and guest join.",
@@ -68,20 +78,10 @@ function getFallbackRepos(): GitHubRepo[] {
       updated_at: new Date().toISOString(),
     },
     {
-      id: 2,
+      id: 3,
       name: "Digi-Receipt",
       description:
         "Donation e-receipt system with donor lists and PDF certificate download.",
-      html_url: personalInfo.github,
-      stargazers_count: 0,
-      language: "TypeScript",
-      updated_at: new Date().toISOString(),
-    },
-    {
-      id: 3,
-      name: "GPS-Staff-Management",
-      description:
-        "Staff management platform for the Ghana Police Service Eastern North Region.",
       html_url: personalInfo.github,
       stargazers_count: 0,
       language: "TypeScript",

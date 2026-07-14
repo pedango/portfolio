@@ -9,6 +9,8 @@ import {
   Lightbulb,
   Play,
   Star,
+  Target,
+  Wrench,
 } from "lucide-react";
 import { getProjectBySlug, getAllProjectSlugs } from "@/data/projects";
 import { getGoogleDriveEmbedUrl } from "@/lib/utils";
@@ -161,6 +163,32 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <Separator className="my-12" />
 
         <div className="grid gap-8">
+          <div className="grid gap-8 md:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-xl">
+                  <Target className="h-5 w-5 text-primary" />
+                  Problem
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">{project.problem}</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-xl">
+                  <Wrench className="h-5 w-5 text-primary" />
+                  Solution
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">{project.solution}</p>
+              </CardContent>
+            </Card>
+          </div>
+
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-xl">

@@ -4,6 +4,8 @@ export interface Project {
   type: "Team Project" | "Independent Project";
   description: string;
   shortDescription: string;
+  problem: string;
+  solution: string;
   contributions: string[];
   technologies: string[];
   githubUrl?: string;
