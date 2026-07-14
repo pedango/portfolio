@@ -11,12 +11,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export function Projects() {
-  const sortedProjects = [...projects].sort((a, b) => {
-    if (a.featured && !b.featured) return -1;
-    if (!a.featured && b.featured) return 1;
-    return 0;
-  });
-
   return (
     <AnimatedSection id="projects" className="bg-muted/30">
       <SectionHeading
@@ -25,7 +19,7 @@ export function Projects() {
       />
 
       <div className="grid gap-6">
-        {sortedProjects.map((project, index) => (
+        {projects.map((project, index) => (
           <motion.article
             key={project.slug}
             initial={{ opacity: 0, y: 24 }}

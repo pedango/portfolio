@@ -2,19 +2,18 @@ import type { GitHubRepo } from "@/types";
 import { personalInfo } from "@/data/personal";
 
 const PRIORITY_REPOS = [
-  "lambda-lms",
-  "skillswap",
-  "gps-police-management",
-  "lambda-annotate",
-  "digi-receipt",
   "fhm-meet",
   "FHM-Meet",
+  "digi-receipt",
   "Digi-Receipt",
+  "gps-police",
+  "GPS-Police-Personnel-Management-System",
   "lambda-lms",
   "Lambda-LMS",
-  "SkillSwap",
-  "GPS-Police-Personnel-Management-System",
+  "lambda-annotate",
   "Lambda-Annotate",
+  "skillswap",
+  "SkillSwap",
 ];
 
 export async function fetchGitHubRepos(): Promise<GitHubRepo[]> {
@@ -60,9 +59,9 @@ function getFallbackRepos(): GitHubRepo[] {
   return [
     {
       id: 1,
-      name: "Lambda-LMS",
+      name: "FHM-Meet",
       description:
-        "Learning Management System for online learning, assignments, and grading.",
+        "Video conferencing app with link-based meetings and guest join.",
       html_url: personalInfo.github,
       stargazers_count: 0,
       language: "TypeScript",
@@ -70,9 +69,9 @@ function getFallbackRepos(): GitHubRepo[] {
     },
     {
       id: 2,
-      name: "SkillSwap",
+      name: "Digi-Receipt",
       description:
-        "Peer-to-peer skill exchange platform with real-time communication.",
+        "Donation e-receipt system with donor lists and PDF certificate download.",
       html_url: personalInfo.github,
       stargazers_count: 0,
       language: "TypeScript",
@@ -90,6 +89,16 @@ function getFallbackRepos(): GitHubRepo[] {
     },
     {
       id: 4,
+      name: "Lambda-LMS",
+      description:
+        "Learning Management System for online learning, assignments, and grading.",
+      html_url: personalInfo.github,
+      stargazers_count: 0,
+      language: "TypeScript",
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: 5,
       name: "Lambda-Annotate",
       description:
         "Web-based annotation platform for structured annotation workflows.",
@@ -99,23 +108,13 @@ function getFallbackRepos(): GitHubRepo[] {
       updated_at: new Date().toISOString(),
     },
     {
-      id: 5,
-      name: "Digi-Receipt",
-      description:
-        "Donation e-receipt system with donor lists and PDF certificate download.",
-      html_url: personalInfo.github,
-      stargazers_count: 0,
-      language: "TypeScript",
-      updated_at: new Date().toISOString(),
-    },
-    {
       id: 6,
-      name: "FHM-Meet",
+      name: "SkillSwap",
       description:
-        "Video conferencing app with link-based meetings and guest join.",
+        "Peer-to-peer skill exchange platform with real-time communication.",
       html_url: personalInfo.github,
       stargazers_count: 0,
-      language: "TypeScript",
+      language: "Dart",
       updated_at: new Date().toISOString(),
     },
   ];
