@@ -11,11 +11,11 @@ import { Button } from "@/components/ui/button";
 function AnimatedBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div className="absolute -left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl" />
-      <div className="absolute -right-1/4 top-1/3 h-[400px] w-[400px] rounded-full bg-blue-500/10 blur-3xl" />
-      <div className="absolute bottom-0 left-1/3 h-[300px] w-[300px] rounded-full bg-purple-500/10 blur-3xl" />
+      <div className="absolute -left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-primary/15 blur-3xl" />
+      <div className="absolute -right-1/4 top-1/3 h-[400px] w-[400px] rounded-full bg-glow/10 blur-3xl" />
+      <div className="absolute bottom-0 left-1/3 h-[300px] w-[300px] rounded-full bg-glow-soft/10 blur-3xl" />
       <motion.div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-40"
         animate={{
           backgroundPosition: ["0% 0%", "100% 100%"],
         }}
@@ -27,7 +27,7 @@ function AnimatedBackground() {
         }}
         style={{
           backgroundImage:
-            "radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)",
+            "radial-gradient(circle at 20% 50%, color-mix(in srgb, var(--glow) 18%, transparent) 0%, transparent 50%), radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--glow-soft) 14%, transparent) 0%, transparent 50%)",
         }}
       />
     </div>
@@ -102,7 +102,7 @@ export function Hero() {
             asChild
             variant="outline"
             size="lg"
-            className="h-12 min-h-12 min-w-[11rem] border-border bg-white/5 px-6 backdrop-blur-md"
+            className="h-12 min-h-12 min-w-[11rem] border-border bg-foreground/5 px-6 backdrop-blur-md"
           >
             <Link href="#contact">Contact Me</Link>
           </Button>
