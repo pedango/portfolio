@@ -1,6 +1,6 @@
 import type { Project } from "@/types";
 
-/** Display order: GPS → FHM-Meet → Digi-Receipt → Lambda LMS → Lambda Annotate → SkillSwap */
+/** Display order: GPS → MWC → AER → FHM-Meet → Digi-Receipt → Lambda LMS → Lambda Annotate */
 export const projects: Project[] = [
   {
     slug: "gps-police-management",
@@ -99,6 +99,156 @@ export const projects: Project[] = [
       "Independent development requires disciplined architecture planning upfront",
       "Administrative workflows should minimize steps for end users",
       "Clear database design simplifies complex reporting requirements",
+    ],
+  },
+  {
+    slug: "mwc-member-registry",
+    title: "MWC Member Registry",
+    type: "Independent Project",
+    featured: true,
+    description:
+      "Admin-only church member management system for Mamprobi Worship Center (PIWC branch assembly), covering membership records, Sunday attendance with QR check-in, bulk import, and audit logging.",
+    shortDescription:
+      "Church member registry with CRUD, webcam photos, QR attendance, bulk import, and audit logs.",
+    problem:
+      "Mamprobi Worship Center needed a secure, centralized way for administrators to manage member records across assemblies, track Sunday attendance, and keep an audit trail — without spreadsheets or paper registers that are hard to search, export, or reconcile.",
+    solution:
+      "Built an admin-only web platform with member CRUD (including live webcam photo capture and duplicate-name detection), assembly filters and paginated search, spreadsheet bulk import, PDF/Excel export, Sunday attendance via door QR codes, and full audit logging for logins and exports.",
+    contributions: [
+      "Designed and built an admin-only church member management system for Mamprobi Worship Center (PIWC branch assembly)",
+      "Implemented member CRUD with live webcam photo capture, duplicate-name detection, assembly filter views, and paginated search",
+      "Built spreadsheet bulk import with template download, single-member PDF/Excel export, and full audit logging for logins and exports",
+      "Added Sunday attendance workflows with door QR codes so members can open the check-in form on their phone",
+    ],
+    technologies: [
+      "Next.js 14",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL (Neon)",
+      "NextAuth.js v5",
+      "Cloudinary",
+      "SheetJS",
+      "pdf-lib",
+      "Upstash Redis",
+      "Tailwind CSS",
+    ],
+    liveUrl: "https://mwc-member-registry.vercel.app",
+    image: "/assets/projects/mwc-member-registry/dashboard.png",
+    screenshots: [
+      {
+        src: "/assets/projects/mwc-member-registry/dashboard.png",
+        alt: "MWC dashboard with membership stats, recent activity, and quick actions",
+      },
+      {
+        src: "/assets/projects/mwc-member-registry/login.jpg",
+        alt: "MWC Member Registry sign-in page with church branding",
+      },
+      {
+        src: "/assets/projects/mwc-member-registry/members.png",
+        alt: "Members table with search, assembly, status, and row actions",
+      },
+      {
+        src: "/assets/projects/mwc-member-registry/attendance.png",
+        alt: "Sunday attendance page with present counts and door QR code",
+      },
+    ],
+    architecture: [
+      "Next.js full-stack application with protected admin workflows",
+      "PostgreSQL on Neon with Prisma for members, assemblies, attendance, and audit events",
+      "NextAuth.js v5 authentication with role-restricted administrator access",
+      "Cloudinary for member photo storage from webcam capture uploads",
+      "SheetJS and pdf-lib for spreadsheet import/export and PDF member exports",
+      "Upstash Redis for session or rate-limit support in production",
+    ],
+    features: [
+      "Member CRUD with live webcam photo capture",
+      "Duplicate-name detection and assembly filter views",
+      "Paginated search across name, contact, and location",
+      "Spreadsheet bulk import with downloadable template",
+      "Single-member PDF and Excel export",
+      "Sunday attendance with door QR check-in",
+      "Admin management and full audit logging for logins and exports",
+    ],
+    lessonsLearned: [
+      "Church admin tools need clear role boundaries and an auditable trail of sensitive actions",
+      "Bulk import succeeds when template download and validation catch bad rows early",
+      "QR check-in removes friction for door volunteers compared with manual roll call",
+      "Webcam capture must degrade gracefully when devices or permissions are unavailable",
+    ],
+  },
+  {
+    slug: "aer",
+    title: "AER Website",
+    type: "Team Project",
+    description:
+      "Modern multi-page website for Advanced Economic Research, a consulting and research firm focused on agrifood systems, policy design, and climate resilience.",
+    shortDescription:
+      "Content-driven marketing site for Advanced Economic Research with services, portfolio, case studies, and insights.",
+    problem:
+      "Advanced Economic Research needed a professional web presence that presented services, portfolio partners, case studies, and research insights clearly — with a structure that the team could expand as new publications and engagements ship.",
+    solution:
+      "Designed and built a scalable, content-driven Next.js site with dedicated pages for services, portfolio, case studies, insights, team, and contact, plus reusable components, motion, and SEO-friendly metadata for stronger brand presence.",
+    contributions: [
+      "Designed and built a modern, multi-page website for Advanced Economic Research focused on agrifood systems, policy design, and climate resilience",
+      "Created a scalable, content-driven architecture with dedicated pages for services, portfolio, case studies, insights, team, and contact",
+      "Implemented a responsive front-end with reusable components, animated sections, and SEO-friendly metadata",
+      "Built structured content models for projects, services, and insights to support efficient updates and future expansion",
+    ],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Vercel",
+    ],
+    liveUrl: "https://www.aer.africa",
+    image: "/assets/projects/aer/home.png",
+    screenshots: [
+      {
+        src: "/assets/projects/aer/home.png",
+        alt: "AER homepage hero with economic research headline and call to action",
+      },
+      {
+        src: "/assets/projects/aer/services.png",
+        alt: "AER services page introducing economic interventions capabilities",
+      },
+      {
+        src: "/assets/projects/aer/about.png",
+        alt: "AER about page overview of the firm",
+      },
+      {
+        src: "/assets/projects/aer/case-studies.png",
+        alt: "AER case studies showcase of research engagements",
+      },
+      {
+        src: "/assets/projects/aer/insights.png",
+        alt: "AER insights and research publications listing",
+      },
+      {
+        src: "/assets/projects/aer/team.png",
+        alt: "AER team page introducing researchers and consultants",
+      },
+    ],
+    architecture: [
+      "Next.js App Router site with route groups for marketing pages",
+      "Structured content models for services, portfolio, case studies, and insights",
+      "Reusable layout, hero, and section components shared across pages",
+      "Framer Motion for section and gallery motion",
+      "SEO metadata, sitemap, and robots configuration for discoverability",
+      "Deployed on Vercel at aer.africa",
+    ],
+    features: [
+      "Multi-page structure for services, portfolio, case studies, insights, team, and contact",
+      "Responsive design with reusable UI components",
+      "Animated sections and image-rich showcases",
+      "SEO-friendly metadata and canonical URLs",
+      "Content models that support ongoing research and publication updates",
+    ],
+    lessonsLearned: [
+      "Consulting brand sites need a clear information architecture before visual polish",
+      "Structured content models keep case studies and insights maintainable as the firm grows",
+      "Motion should support hierarchy without slowing first contentful paint",
+      "Strong SEO defaults matter when the primary goal is professional discovery",
     ],
   },
   {
@@ -422,72 +572,6 @@ export const projects: Project[] = [
       "Export fidelity matters when annotations need to travel outside the app",
       "Audio comments add valuable context for educators reviewing student work",
       "Solo projects benefit from delivering the core marking flow before extras",
-    ],
-  },
-  {
-    slug: "skillswap",
-    title: "SkillSwap",
-    type: "Team Project",
-    description:
-      "Peer-to-peer skill exchange platform connecting users who want to teach and learn skills.",
-    shortDescription:
-      "Peer-to-peer platform for teaching and learning skills with real-time communication.",
-    problem:
-      "People who wanted to teach one skill and learn another lacked a simple peer platform that combined matching with real-time messaging and live audio/video for virtual learning sessions.",
-    solution:
-      "Built a Flutter skill-exchange app with mentor matching, real-time text messaging, and audio/video communication for peer teaching and learning sessions.",
-    contributions: [
-      "Built a peer-to-peer skill exchange platform with real-time text messaging",
-      "Developed audio and video communication features for virtual learning sessions",
-      "Participated in testing, debugging, and feature integration",
-    ],
-    technologies: [
-      "Flutter",
-      "Firebase",
-    ],
-    githubUrl: "https://github.com/pedango",
-    image: "/assets/projects/skillswap/home.png",
-    screenshots: [
-      {
-        src: "/assets/projects/skillswap/home.png",
-        alt: "SkillSwap home screen with session booking and mentor discovery",
-      },
-      {
-        src: "/assets/projects/skillswap/login.png",
-        alt: "Login screen with social and email authentication",
-      },
-      {
-        src: "/assets/projects/skillswap/matches.png",
-        alt: "Mentor matches list with search and messaging",
-      },
-      {
-        src: "/assets/projects/skillswap/profile.png",
-        alt: "User profile with teaching and learning skills",
-      },
-      {
-        src: "/assets/projects/skillswap/learning-progress.png",
-        alt: "Learning progress dashboard with goals and analytics",
-      },
-    ],
-    architecture: [
-      "Flutter mobile application with Firebase-backed services",
-      "Real-time messaging and mentor discovery flows",
-      "User profiles with teaching and learning skill preferences",
-      "Session booking, progress tracking, and community features",
-      "Audio and video communication for virtual skill sessions",
-    ],
-    features: [
-      "Mentor matching and skill discovery",
-      "Real-time text messaging between users",
-      "Audio and video communication for skill sessions",
-      "User profiles with teach and learn preferences",
-      "Learning progress tracking and session booking",
-    ],
-    lessonsLearned: [
-      "Real-time communication features require careful error handling and fallbacks",
-      "Integrating multiple communication channels demands consistent UX patterns",
-      "Peer-to-peer platforms benefit from strong user matching and discovery flows",
-      "Security is critical when handling user-generated content and sessions",
     ],
   },
 ];

@@ -4,6 +4,9 @@ import { personalInfo } from "@/data/personal";
 const PRIORITY_REPOS = [
   "gps-police",
   "GPS-Police-Personnel-Management-System",
+  "mwc-member-registry",
+  "MWC-Member-Registry",
+  "aer",
   "fhm-meet",
   "FHM-Meet",
   "digi-receipt",
@@ -12,8 +15,6 @@ const PRIORITY_REPOS = [
   "Lambda-LMS",
   "lambda-annotate",
   "Lambda-Annotate",
-  "skillswap",
-  "SkillSwap",
 ];
 
 export async function fetchGitHubRepos(): Promise<GitHubRepo[]> {
@@ -69,6 +70,26 @@ function getFallbackRepos(): GitHubRepo[] {
     },
     {
       id: 2,
+      name: "MWC-Member-Registry",
+      description:
+        "Church member registry with attendance, bulk import, and audit logs.",
+      html_url: personalInfo.github,
+      stargazers_count: 0,
+      language: "TypeScript",
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: 3,
+      name: "AER",
+      description:
+        "Website for Advanced Economic Research — agrifood systems and policy consulting.",
+      html_url: personalInfo.github,
+      stargazers_count: 0,
+      language: "TypeScript",
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: 4,
       name: "FHM-Meet",
       description:
         "Video conferencing app with link-based meetings and guest join.",
@@ -78,7 +99,7 @@ function getFallbackRepos(): GitHubRepo[] {
       updated_at: new Date().toISOString(),
     },
     {
-      id: 3,
+      id: 5,
       name: "Digi-Receipt",
       description:
         "Donation e-receipt system with donor lists and PDF certificate download.",
@@ -88,33 +109,13 @@ function getFallbackRepos(): GitHubRepo[] {
       updated_at: new Date().toISOString(),
     },
     {
-      id: 4,
+      id: 6,
       name: "Lambda-LMS",
       description:
         "Learning Management System for online learning, assignments, and grading.",
       html_url: personalInfo.github,
       stargazers_count: 0,
       language: "TypeScript",
-      updated_at: new Date().toISOString(),
-    },
-    {
-      id: 5,
-      name: "Lambda-Annotate",
-      description:
-        "Web-based annotation platform for structured annotation workflows.",
-      html_url: personalInfo.github,
-      stargazers_count: 0,
-      language: "TypeScript",
-      updated_at: new Date().toISOString(),
-    },
-    {
-      id: 6,
-      name: "SkillSwap",
-      description:
-        "Peer-to-peer skill exchange platform with real-time communication.",
-      html_url: personalInfo.github,
-      stargazers_count: 0,
-      language: "Dart",
       updated_at: new Date().toISOString(),
     },
   ];

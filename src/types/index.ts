@@ -9,6 +9,7 @@ export interface Project {
   contributions: string[];
   technologies: string[];
   githubUrl?: string;
+  liveUrl?: string;
   featured?: boolean;
   status?: "Ongoing";
   image: string;

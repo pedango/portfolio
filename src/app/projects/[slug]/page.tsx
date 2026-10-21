@@ -107,18 +107,34 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           ))}
         </div>
 
-        {/* Primary CTA near title */}
-        {project.githubUrl && (
-          <Button asChild className="mt-8">
-            <Link
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ExternalLink className="h-4 w-4" />
-              View on GitHub
-            </Link>
-          </Button>
+        {/* Primary CTAs near title */}
+        {(project.liveUrl || project.githubUrl) && (
+          <div className="mt-8 flex flex-wrap gap-3">
+            {project.liveUrl && (
+              <Button asChild>
+                <Link
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  Visit Live Site
+                </Link>
+              </Button>
+            )}
+            {project.githubUrl && (
+              <Button asChild variant={project.liveUrl ? "outline" : "default"}>
+                <Link
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  View on GitHub
+                </Link>
+              </Button>
+            )}
+          </div>
         )}
 
         <Separator className="my-12" />
@@ -284,8 +300,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {/* 12. Links at bottom */}
         <Separator className="my-12" />
         <div className="flex flex-wrap gap-3">
-          {project.githubUrl && (
+          {project.liveUrl && (
             <Button asChild>
+              <Link
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink className="h-4 w-4" />
+                Visit Live Site
+              </Link>
+            </Button>
+          )}
+          {project.githubUrl && (
+            <Button asChild variant={project.liveUrl ? "outline" : "default"}>
               <Link
                 href={project.githubUrl}
                 target="_blank"

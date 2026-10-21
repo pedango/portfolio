@@ -9,7 +9,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Frontend",
     icon: "Layout",
-    skills: ["React", "Next.js", "HTML5", "CSS3", "Tailwind CSS"],
+    skills: ["React", "Next.js", "HTML5", "CSS3", "Tailwind CSS", "Framer Motion"],
   },
   {
     title: "Backend",
@@ -22,14 +22,28 @@ export const skillCategories: SkillCategory[] = [
     skills: ["MySQL", "PostgreSQL", "Prisma", "Supabase"],
   },
   {
-    title: "Testing & Security",
-    icon: "Shield",
-    skills: ["Apache JMeter", "Snyk"],
+    title: "PDF & Annotation",
+    icon: "FileText",
+    skills: ["Fabric.js", "PDF.js", "pdf-lib", "jsPDF"],
   },
   {
-    title: "Tools",
+    title: "Testing & Security",
+    icon: "Shield",
+    skills: ["Apache JMeter", "Snyk", "Playwright"],
+  },
+  {
+    title: "Tools & Platforms",
     icon: "Wrench",
-    skills: ["Git", "GitHub", "VS Code", "Clerk"],
+    skills: [
+      "Git",
+      "GitHub",
+      "VS Code",
+      "Clerk",
+      "Cloudinary",
+      "Vercel",
+      "Upstash Redis",
+      "Zustand",
+    ],
   },
   {
     title: "Professional Skills",

@@ -92,6 +92,18 @@ export function Projects() {
                       <ArrowRight className="h-4 w-4" />
                     </Link>
                   </Button>
+                  {project.liveUrl && (
+                    <Button asChild variant="outline">
+                      <Link
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                        Live Site
+                      </Link>
+                    </Button>
+                  )}
                   {project.githubUrl && (
                     <Button asChild variant="outline">
                       <Link

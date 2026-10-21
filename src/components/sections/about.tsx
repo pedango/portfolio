@@ -9,7 +9,7 @@ export function About() {
     <AnimatedSection id="about" className="bg-muted/30">
       <SectionHeading
         title="About Me"
-        subtitle="Computer Science graduate passionate about building software that makes a difference"
+        subtitle="Computer Science graduate building web apps, EdTech, and community-impact systems"
       />
 
       <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-10">
@@ -51,17 +51,18 @@ export function About() {
                   Security & Quality
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Experienced with Snyk for vulnerability scanning and Apache
-                  JMeter for performance testing.
+                  Working knowledge of JMeter for performance testing, Playwright
+                  for end-to-end testing, and Snyk for vulnerability assessment.
                 </p>
               </div>
               <div className="rounded-lg border border-border/30 bg-background/50 p-5">
                 <p className="text-sm font-medium text-foreground">
-                  Education Focus
+                  AI Proficiency
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Teaching experience and EdTech project work inform user-centered
-                  design decisions.
+                  Proficient with modern AI tools across development workflows —
+                  prompt engineering for code generation, automated testing, and
+                  image creation.
                 </p>
               </div>
             </div>

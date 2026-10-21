@@ -8,6 +8,7 @@ import {
   Shield,
   Wrench,
   Users,
+  FileText,
   LucideIcon,
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -26,6 +27,7 @@ const iconMap: Record<string, LucideIcon> = {
   Shield,
   Wrench,
   Users,
+  FileText,
 };
 
 export function Skills() {

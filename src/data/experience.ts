@@ -3,7 +3,7 @@ import type { EducationEntry, Experience, LeadershipEntry } from "@/types";
 export const experiences: Experience[] = [
   {
     title: "Software Development Intern",
-    company: "WidePlus, Accra, Ghana",
+    company: "WidePlus Technologies Limited Company — Accra, Ghana",
     period: "September 2024 – January 2025",
     responsibilities: [
       "Assisted in developing, testing, and maintaining software solutions",
