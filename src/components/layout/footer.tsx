@@ -1,59 +1,52 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
+import { ArrowUp, Mail } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons/social";
 import { personalInfo } from "@/data/personal";
-import { Separator } from "@/components/ui/separator";
+import { Container } from "@/components/ui/container";
+import { IconLink } from "@/components/ui/icon-link";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border/40 bg-background/50">
-      <div className="mx-auto max-w-[1100px] px-4 py-12 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-          <div className="text-center sm:text-left">
-            <p className="text-lg font-semibold">{personalInfo.name}</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {personalInfo.location}
-            </p>
+    <footer className="border-t border-border py-10">
+      <Container>
+        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-sm font-semibold text-fg">{personalInfo.name}</p>
+            <p className="mt-1 text-sm text-fg-muted">{personalInfo.location}</p>
           </div>
 
-          <div className="flex items-center gap-4">
-            <Link
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-              aria-label="GitHub profile"
-            >
+          <div className="flex items-center gap-3">
+            <IconLink href={personalInfo.github} label="GitHub">
               <GitHubIcon />
-            </Link>
-            <Link
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-              aria-label="LinkedIn profile"
-            >
+            </IconLink>
+            <IconLink href={personalInfo.linkedin} label="LinkedIn">
               <LinkedInIcon />
-            </Link>
-            <Link
+            </IconLink>
+            <IconLink
               href={`mailto:${personalInfo.email}`}
-              className="text-muted-foreground transition-colors hover:text-foreground"
-              aria-label="Send email"
+              label="Email"
+              external={false}
             >
               <Mail className="h-5 w-5" />
-            </Link>
+            </IconLink>
           </div>
+
+          <Link
+            href="#hero"
+            className="inline-flex items-center gap-1.5 text-sm text-fg-muted transition-colors hover:text-accent"
+          >
+            Back to top
+            <ArrowUp className="h-3.5 w-3.5" />
+          </Link>
         </div>
 
-        <Separator className="my-8" />
-
-        <p className="text-center text-sm text-muted-foreground">
+        <p className="mt-8 font-mono text-[12px] leading-5 text-fg-subtle">
           © {currentYear} {personalInfo.name}. Built with Next.js, TypeScript &
           Tailwind CSS.
         </p>
-      </div>
+      </Container>
     </footer>
   );
 }

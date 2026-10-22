@@ -1,3 +1,8 @@
+export interface ProjectMetric {
+  value: string;
+  label: string;
+}
+
 export interface Project {
   slug: string;
   title: string;
@@ -12,6 +17,9 @@ export interface Project {
   liveUrl?: string;
   featured?: boolean;
   status?: "Ongoing";
+  role?: string;
+  year?: string;
+  metrics?: ProjectMetric[];
   image: string;
   screenshots?: { src: string; alt: string }[];
   demoVideoUrl?: string;

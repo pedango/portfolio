@@ -7,6 +7,13 @@ export const projects: Project[] = [
     title: "Ghana Police Service Staff Management System",
     type: "Independent Project",
     featured: true,
+    role: "Full-Stack Developer",
+    year: "2025",
+    metrics: [
+      { value: "128", label: "Staff managed" },
+      { value: "3", label: "System admins" },
+      { value: "Realtime", label: "Calls, voice notes & docs" },
+    ],
     description:
       "Secure, admin-only staff management platform for the Ghana Police Service Eastern North Region, supporting records management, messaging, and real-time communication.",
     shortDescription:
@@ -34,7 +41,7 @@ export const projects: Project[] = [
       "Upstash Redis",
       "Tailwind CSS",
     ],
-    githubUrl: "https://github.com/pedango",
+    githubUrl: "https://github.com/pedango/gps-staff-management-system",
     image: "/assets/projects/gps-police/login.png",
     screenshots: [
       {
@@ -106,6 +113,13 @@ export const projects: Project[] = [
     title: "MWC Member Registry",
     type: "Independent Project",
     featured: true,
+    role: "Full-Stack Developer",
+    year: "2025",
+    metrics: [
+      { value: "600+", label: "Members managed" },
+      { value: "5", label: "System admins" },
+      { value: "Live", label: "QR Sunday attendance" },
+    ],
     description:
       "Admin-only church member management system for Mamprobi Worship Center (PIWC branch assembly), covering membership records, Sunday attendance with QR check-in, bulk import, and audit logging.",
     shortDescription:
@@ -133,6 +147,7 @@ export const projects: Project[] = [
       "Tailwind CSS",
     ],
     liveUrl: "https://mwc-member-registry.vercel.app",
+    githubUrl: "https://github.com/pedango/mwc-member-registry",
     image: "/assets/projects/mwc-member-registry/dashboard.png",
     screenshots: [
       {
@@ -180,6 +195,8 @@ export const projects: Project[] = [
     slug: "aer",
     title: "AER Website",
     type: "Team Project",
+    role: "Full-Stack Developer",
+    year: "2026",
     description:
       "Modern multi-page website for Advanced Economic Research, a consulting and research firm focused on agrifood systems, policy design, and climate resilience.",
     shortDescription:
@@ -255,6 +272,8 @@ export const projects: Project[] = [
     slug: "fhm-meet",
     title: "FHM-Meet",
     type: "Independent Project",
+    role: "Full-Stack Developer",
+    year: "2026",
     description:
       "Zoom and Google Meet-style video conferencing web app for Flare Healing Ministries, with instant link-based meeting access and frictionless guest join.",
     shortDescription:
@@ -277,6 +296,7 @@ export const projects: Project[] = [
       "Prisma",
       "Tailwind CSS",
     ],
+    githubUrl: "https://github.com/pedango/fhm-meet",
     image: "/assets/projects/fhm-meet/home.png",
     demoVideoUrl:
       "https://drive.google.com/file/d/1uPEQgcduyhoFLvDkzAEc0MngT0G9Gf0v/view?usp=drivesdk",
@@ -335,6 +355,8 @@ export const projects: Project[] = [
     slug: "digi-receipt",
     title: "Digi-Receipt System",
     type: "Independent Project",
+    role: "Full-Stack Developer",
+    year: "2026",
     description:
       "Web app for recording donations at any event that issues receipts — funerals, fundraising drives, church offerings, and similar occasions — then generating unique digital receipts and maintaining shared donor records.",
     shortDescription:
@@ -355,7 +377,7 @@ export const projects: Project[] = [
       "PostgreSQL",
       "jsPDF",
     ],
-    githubUrl: "https://github.com/pedango",
+    githubUrl: "https://github.com/pedango/digi-receipt",
     image: "/assets/projects/digi-receipt/home.png",
     demoVideoUrl:
       "https://drive.google.com/file/d/12k-U_V8xOyYVy5vHmdtttl-gYBQWsfzR/view?usp=drivesdk",
@@ -423,6 +445,8 @@ export const projects: Project[] = [
     slug: "lambda-lms",
     title: "Lambda LMS",
     type: "Team Project",
+    role: "Full-Stack Developer",
+    year: "2025",
     description:
       "Learning Management System designed to support online learning, assignment submission, grading, course management and educational content delivery.",
     shortDescription:
@@ -442,7 +466,6 @@ export const projects: Project[] = [
       "PostgreSQL",
       "Tailwind CSS",
     ],
-    githubUrl: "https://github.com/pedango",
     image: "/assets/projects/lambda-lms/home.png",
     screenshots: [
       {
@@ -511,6 +534,8 @@ export const projects: Project[] = [
     slug: "lambda-annotate",
     title: "Lambda Annotate",
     type: "Independent Project",
+    role: "Full-Stack Developer",
+    year: "2025",
     description:
       "PDF annotation tool designed to integrate into an LMS as the examiner marking interface, with drawing, comments, audio notes, and export.",
     shortDescription:
@@ -533,7 +558,7 @@ export const projects: Project[] = [
       "Zustand",
       "Tailwind CSS",
     ],
-    githubUrl: "https://github.com/pedango",
+    githubUrl: "https://github.com/pedango/Lambda-Annotate",
     image: "/assets/projects/lambda-annotate/home.png",
     screenshots: [
       {

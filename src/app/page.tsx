@@ -5,10 +5,33 @@ import { Skills } from "@/components/sections/skills";
 import { Projects } from "@/components/sections/projects";
 import { Experience } from "@/components/sections/experience";
 
+function GitHubSkeleton() {
+  return (
+    <section
+      id="github"
+      className="py-[72px] md:py-[112px]"
+      aria-busy="true"
+      aria-label="Loading repositories"
+    >
+      <div className="mx-auto w-full max-w-[1120px] px-6 md:px-8">
+        <div className="mb-10 h-8 w-48 animate-pulse rounded bg-surface-2" />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div
+              key={index}
+              className="h-40 animate-pulse rounded-[12px] border border-border bg-surface"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const GitHubSection = dynamic(
   () =>
     import("@/components/sections/github").then((mod) => mod.GitHubSection),
-  { loading: () => <div className="py-12 text-center text-muted-foreground">Loading repositories...</div> }
+  { loading: () => <GitHubSkeleton /> }
 );
 
 const Contact = dynamic(

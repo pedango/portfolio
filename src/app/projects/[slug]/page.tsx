@@ -3,8 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
+  ArrowUpRight,
   CheckCircle2,
-  ExternalLink,
   ImageIcon,
   Layers,
   Lightbulb,
@@ -15,9 +15,9 @@ import {
 } from "lucide-react";
 import { getProjectBySlug, getAllProjectSlugs } from "@/data/projects";
 import { getGoogleDriveEmbedUrl } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Container } from "@/components/ui/container";
 import { Separator } from "@/components/ui/separator";
 
 interface ProjectPageProps {
@@ -54,60 +54,71 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const galleryScreenshots =
     project.screenshots?.filter((shot) => shot.src !== project.image) ?? [];
 
+  const typeLabel =
+    project.type === "Independent Project" ? "INDEPENDENT" : "TEAM";
+
   return (
     <article className="min-h-screen pt-24 pb-20">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <Button asChild variant="ghost" className="mb-8">
-          <Link href="/#projects">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Projects
+      <Container className="max-w-4xl">
+        <nav className="mb-8 font-mono text-[12px] uppercase tracking-[0.08em] text-fg-subtle">
+          <Link href="/#projects" className="transition-colors hover:text-accent">
+            Projects
           </Link>
-        </Button>
+          <span className="mx-2">/</span>
+          <span className="text-fg-muted">{project.title}</span>
+        </nav>
 
-        {/* 1. Hero image */}
-        <div className="relative mb-8 aspect-video overflow-hidden rounded-2xl border border-border/50">
+        <div className="relative mb-8 aspect-video overflow-hidden rounded-[12px] border border-border">
           <Image
             src={project.image}
             alt={`${project.title} project`}
             fill
-            className="object-cover"
+            className="object-cover object-top"
             priority
             sizes="(max-width: 896px) 100vw, 896px"
           />
         </div>
 
-        {/* 2. Title + badges + intro */}
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <Badge variant="outline">{project.type}</Badge>
-          {project.featured && (
-            <Badge className="bg-primary text-primary-foreground">
-              <Star className="mr-1 h-3 w-3" />
+        <div className="flex flex-wrap items-center gap-3 font-mono text-[12px] uppercase tracking-[0.08em] text-fg-subtle">
+          {project.role ? <span>{project.role}</span> : null}
+          {project.year ? <span>{project.year}</span> : null}
+          <span>{typeLabel}</span>
+          {project.featured ? (
+            <span className="inline-flex items-center gap-1">
+              <Star className="h-3 w-3" aria-hidden="true" />
               Featured
-            </Badge>
-          )}
-          {project.status === "Ongoing" && (
-            <Badge variant="secondary">Ongoing</Badge>
-          )}
+            </span>
+          ) : null}
+          {project.status === "Ongoing" ? <span>Ongoing</span> : null}
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="mt-4 text-[32px] font-semibold leading-[38px] tracking-[-0.02em] text-fg md:text-[40px] md:leading-[46px]">
           {project.title}
         </h1>
 
-        <p className="mt-4 text-lg text-muted-foreground">
+        <p className="mt-4 max-w-[64ch] text-lg leading-[30px] text-fg-muted">
           {project.description}
         </p>
 
-        {/* 3. Tech stack */}
-        <div className="mt-6 flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <Badge key={tech} variant="tech">
-              {tech}
-            </Badge>
-          ))}
-        </div>
+        {project.metrics && project.metrics.length > 0 ? (
+          <dl className="mt-8 grid grid-cols-2 gap-4 border-y border-border py-6 sm:grid-cols-3">
+            {project.metrics.map((metric) => (
+              <div key={metric.label}>
+                <dt className="font-mono text-[12px] uppercase tracking-[0.08em] text-fg-subtle">
+                  {metric.label}
+                </dt>
+                <dd className="mt-2 font-mono text-[28px] font-semibold leading-none tracking-tight text-fg">
+                  {metric.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
 
-        {/* Primary CTAs near title */}
+        <p className="mt-6 font-mono text-[12px] leading-5 text-fg-subtle">
+          {project.technologies.join(" · ")}
+        </p>
+
         {(project.liveUrl || project.githubUrl) && (
           <div className="mt-8 flex flex-wrap gap-3">
             {project.liveUrl && (
@@ -117,8 +128,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <ExternalLink className="h-4 w-4" />
                   Visit Live Site
+                  <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </Button>
             )}
@@ -129,8 +140,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <ExternalLink className="h-4 w-4" />
                   View on GitHub
+                  <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </Button>
             )}
@@ -139,44 +150,42 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <Separator className="my-12" />
 
-        <div className="grid gap-8">
-          {/* 4–5. Problem & Solution */}
-          <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <Target className="h-5 w-5 text-primary" />
+                <CardTitle className="flex items-center gap-2">
+                  <Target className="h-4 w-4 text-fg-subtle" />
                   Problem
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">{project.problem}</p>
+                <p className="text-sm leading-6 text-fg-muted">{project.problem}</p>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <Wrench className="h-5 w-5 text-primary" />
+                <CardTitle className="flex items-center gap-2">
+                  <Wrench className="h-4 w-4 text-fg-subtle" />
                   Solution
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">{project.solution}</p>
+                <p className="text-sm leading-6 text-fg-muted">{project.solution}</p>
               </CardContent>
             </Card>
           </div>
 
-          {/* 6. Contributions */}
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-xl">
-                <CheckCircle2 className="h-5 w-5 text-primary" />
+              <CardTitle className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-fg-subtle" />
                 My Contributions
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="ml-4 list-disc space-y-2 text-muted-foreground">
+              <ul className="ml-4 list-disc space-y-2 text-sm leading-6 text-fg-muted">
                 {project.contributions.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -184,16 +193,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </CardContent>
           </Card>
 
-          {/* 7. Key features */}
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-xl">
-                <Star className="h-5 w-5 text-primary" />
+              <CardTitle className="flex items-center gap-2">
+                <Star className="h-4 w-4 text-fg-subtle" />
                 Key Features
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="ml-4 list-disc space-y-2 text-muted-foreground">
+              <ul className="ml-4 list-disc space-y-2 text-sm leading-6 text-fg-muted">
                 {project.features.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -201,16 +209,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </CardContent>
           </Card>
 
-          {/* 8. Architecture */}
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-xl">
-                <Layers className="h-5 w-5 text-primary" />
+              <CardTitle className="flex items-center gap-2">
+                <Layers className="h-4 w-4 text-fg-subtle" />
                 Architecture
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="ml-4 list-disc space-y-2 text-muted-foreground">
+              <ul className="ml-4 list-disc space-y-2 text-sm leading-6 text-fg-muted">
                 {project.architecture.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -218,16 +225,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </CardContent>
           </Card>
 
-          {/* 9. Lessons learned */}
-          <Card className="border-primary/20 bg-primary/5">
+          <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-xl">
-                <Lightbulb className="h-5 w-5 text-primary" />
+              <CardTitle className="flex items-center gap-2">
+                <Lightbulb className="h-4 w-4 text-fg-subtle" />
                 Lessons Learned
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="ml-4 list-disc space-y-2 text-muted-foreground">
+              <ul className="ml-4 list-disc space-y-2 text-sm leading-6 text-fg-muted">
                 {project.lessonsLearned.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -236,20 +242,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </Card>
         </div>
 
-        {/* 10. Screenshots */}
         {galleryScreenshots.length > 0 && (
           <>
             <Separator className="my-12" />
             <div>
-              <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
-                <ImageIcon className="h-5 w-5 text-primary" />
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
+                <ImageIcon className="h-4 w-4 text-fg-subtle" />
                 Screenshots
               </h2>
               <div className="grid gap-4 sm:grid-cols-2">
                 {galleryScreenshots.map((screenshot) => (
                   <div
                     key={screenshot.src}
-                    className="relative aspect-video overflow-hidden rounded-xl border border-border/50"
+                    className="relative aspect-video overflow-hidden rounded-[8px] border border-border"
                   >
                     <Image
                       src={screenshot.src}
@@ -265,16 +270,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </>
         )}
 
-        {/* 11. Demo video */}
         {project.demoVideoUrl && (
           <>
             <Separator className="my-12" />
             <div>
-              <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
-                <Play className="h-5 w-5 text-primary" />
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
+                <Play className="h-4 w-4 text-fg-subtle" />
                 Demo Video
               </h2>
-              <div className="relative aspect-video overflow-hidden rounded-2xl border border-border/50 bg-muted">
+              <div className="relative aspect-video overflow-hidden rounded-[12px] border border-border bg-surface-2">
                 <iframe
                   src={getGoogleDriveEmbedUrl(project.demoVideoUrl)}
                   title={`${project.title} demo video`}
@@ -289,15 +293,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <ExternalLink className="h-4 w-4" />
                   Open in Google Drive
+                  <ArrowUpRight className="h-3.5 w-3.5" />
                 </Link>
               </Button>
             </div>
           </>
         )}
 
-        {/* 12. Links at bottom */}
         <Separator className="my-12" />
         <div className="flex flex-wrap gap-3">
           {project.liveUrl && (
@@ -307,8 +310,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ExternalLink className="h-4 w-4" />
                 Visit Live Site
+                <ArrowUpRight className="h-4 w-4" />
               </Link>
             </Button>
           )}
@@ -319,19 +322,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ExternalLink className="h-4 w-4" />
                 View on GitHub
+                <ArrowUpRight className="h-4 w-4" />
               </Link>
             </Button>
           )}
           <Button asChild variant="outline">
             <Link href="/#projects">
               <ArrowLeft className="h-4 w-4" />
-              Back to Projects
+              Back to projects
             </Link>
           </Button>
         </div>
-      </div>
+      </Container>
     </article>
   );
 }

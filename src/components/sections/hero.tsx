@@ -2,166 +2,136 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Download, Mail, ArrowDown } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Download, MapPin } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/icons/social";
 import { personalInfo } from "@/data/personal";
+import { projects } from "@/data/projects";
 import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { IconLink } from "@/components/ui/icon-link";
 
-function AnimatedBackground() {
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div className="absolute -left-1/4 top-0 h-[500px] w-[500px] rounded-full bg-primary/15 blur-3xl" />
-      <div className="absolute -right-1/4 top-1/3 h-[400px] w-[400px] rounded-full bg-glow/10 blur-3xl" />
-      <div className="absolute bottom-0 left-1/3 h-[300px] w-[300px] rounded-full bg-glow-soft/10 blur-3xl" />
-      <motion.div
-        className="absolute inset-0 opacity-40"
-        animate={{
-          backgroundPosition: ["0% 0%", "100% 100%"],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "linear",
-        }}
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 50%, color-mix(in srgb, var(--glow) 18%, transparent) 0%, transparent 50%), radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--glow-soft) 14%, transparent) 0%, transparent 50%)",
-        }}
-      />
-    </div>
-  );
-}
+const ease = [0.21, 0.47, 0.32, 0.98] as const;
 
 export function Hero() {
+  const reduceMotion = useReducedMotion();
+  const projectCount = projects.length;
+
   return (
     <section
       id="hero"
-      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden pt-16"
+      className="relative overflow-hidden pt-24 pb-[72px] md:pt-32 md:pb-[112px]"
+      aria-label="Introduction"
     >
-      <AnimatedBackground />
+      <div
+        className="hero-grid pointer-events-none absolute inset-0"
+        aria-hidden="true"
+      />
 
-      <div className="relative z-10 mx-auto max-w-[1100px] px-4 py-12 text-center sm:px-6 sm:py-16 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="mx-auto mb-6 flex justify-center">
-            <div className="relative h-32 w-32 overflow-hidden rounded-full border-4 border-primary/20 bg-muted shadow-xl shadow-primary/10 sm:h-40 sm:w-40">
+      <Container className="relative z-10">
+        <div className="grid items-center gap-12 lg:grid-cols-[7fr_5fr] lg:gap-16">
+          <motion.div
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease }}
+          >
+            <p className="inline-flex items-center gap-2 font-mono text-[12px] font-medium uppercase leading-4 tracking-[0.08em] text-fg-subtle">
+              <MapPin className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+              {personalInfo.location}
+            </p>
+
+            <h1 className="mt-4 text-[36px] font-semibold leading-[40px] tracking-[-0.03em] text-fg md:text-[56px] md:leading-[60px]">
+              {personalInfo.name}
+            </h1>
+
+            <p className="mt-4 text-xl font-medium leading-7 text-fg">
+              {personalInfo.title}
+            </p>
+
+            <p className="mt-4 max-w-[52ch] text-base leading-7 text-fg-muted md:text-lg md:leading-[30px]">
+              {personalInfo.tagline}
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <Button asChild size="lg" className="h-11 min-w-[10.5rem]">
+                <Link href="#projects">View Projects</Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="h-11 min-w-[10.5rem]"
+              >
+                <a href={personalInfo.cvPath} download>
+                  <Download className="h-4 w-4" />
+                  Download CV
+                </a>
+              </Button>
+              <Button asChild variant="ghost" size="lg" className="h-11">
+                <Link href="#contact">Contact Me</Link>
+              </Button>
+            </div>
+
+            <div className="mt-5 flex items-center gap-3">
+              <IconLink href={personalInfo.github} label="GitHub profile">
+                <GitHubIcon />
+              </IconLink>
+              <IconLink href={personalInfo.linkedin} label="LinkedIn profile">
+                <LinkedInIcon />
+              </IconLink>
+            </div>
+
+            <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-border pt-6 sm:max-w-lg">
+              <div>
+                <dt className="font-mono text-[12px] uppercase tracking-[0.08em] text-fg-subtle">
+                  Projects
+                </dt>
+                <dd className="mt-2 font-mono text-[28px] font-semibold leading-none tracking-tight text-fg">
+                  {projectCount}
+                </dd>
+              </div>
+              <div className="border-l border-border pl-4">
+                <dt className="font-mono text-[12px] uppercase tracking-[0.08em] text-fg-subtle">
+                  Stack
+                </dt>
+                <dd className="mt-2 text-sm font-medium leading-5 text-fg">
+                  Next.js · TypeScript
+                </dd>
+              </div>
+              <div className="border-l border-border pl-4">
+                <dt className="font-mono text-[12px] uppercase tracking-[0.08em] text-fg-subtle">
+                  Education
+                </dt>
+                <dd className="mt-2 text-sm font-medium leading-5 text-fg">
+                  BSc. CS, KNUST
+                </dd>
+              </div>
+            </dl>
+          </motion.div>
+
+          <motion.div
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.06, ease }}
+            className="mx-auto w-full max-w-sm lg:max-w-none"
+          >
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border ring-1 ring-white/5">
               <Image
                 src={personalInfo.portraitPath}
                 alt={personalInfo.name}
                 fill
-                className="object-cover object-top"
                 priority
-                sizes="(max-width: 640px) 128px, 160px"
+                className="object-cover object-[50%_15%]"
+                sizes="(max-width: 1024px) 384px, 420px"
               />
             </div>
-          </div>
+          </motion.div>
+        </div>
 
-          <p className="mb-4 text-sm font-medium uppercase tracking-widest text-primary">
-            {personalInfo.location}
-          </p>
-
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            {personalInfo.name}
-          </h1>
-
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl">
-            {personalInfo.title}
-          </p>
-
-          <p className="mx-auto mt-4 max-w-3xl text-base text-muted-foreground/80 sm:text-lg">
-            {personalInfo.tagline}
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4"
-        >
-          <Button asChild size="lg" className="h-12 min-h-12 min-w-[11rem] px-6">
-            <Link href="#projects">View Projects</Link>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="h-12 min-h-12 min-w-[11rem] border-border px-6"
-          >
-            <a href={personalInfo.cvPath} download>
-              <Download className="h-4 w-4" />
-              Download CV
-            </a>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="h-12 min-h-12 min-w-[11rem] border-border bg-foreground/5 px-6 backdrop-blur-md"
-          >
-            <Link href="#contact">Contact Me</Link>
-          </Button>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-5 flex items-center justify-center gap-4"
-        >
-          <Link
-            href={personalInfo.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-border/50 bg-background/50 p-3 text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/50 hover:text-primary"
-            aria-label="GitHub profile"
-          >
-            <GitHubIcon />
-          </Link>
-          <Link
-            href={personalInfo.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-border/50 bg-background/50 p-3 text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/50 hover:text-primary"
-            aria-label="LinkedIn profile"
-          >
-            <LinkedInIcon />
-          </Link>
-          <Link
-            href={`mailto:${personalInfo.email}`}
-            className="rounded-full border border-border/50 bg-background/50 p-3 text-muted-foreground backdrop-blur-sm transition-all hover:border-primary/50 hover:text-primary"
-            aria-label="Send email"
-          >
-            <Mail className="h-5 w-5" />
-          </Link>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-8"
-        >
-          <Link
-            href="#about"
-            className="inline-flex flex-col items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            aria-label="Scroll to about section"
-          >
-            <span>Learn more</span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <ArrowDown className="h-5 w-5" />
-            </motion.div>
-          </Link>
-        </motion.div>
-      </div>
+        <p className="mt-14 hidden font-mono text-[12px] uppercase tracking-[0.08em] text-fg-subtle md:block">
+          Scroll
+        </p>
+      </Container>
     </section>
   );
 }

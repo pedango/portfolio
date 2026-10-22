@@ -6,7 +6,7 @@ export const siteConfig = {
   description:
     "Portfolio of Dango Edem Peter — Full-Stack Software Developer building educational technology, secure web applications, and community-focused software solutions.",
   url: personalInfo.siteUrl,
-  ogImage: "/assets/og-image.svg",
+  ogImage: "/opengraph-image",
   keywords: [
     "Dango Edem Peter",
     "Full Stack Developer",

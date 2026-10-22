@@ -2,19 +2,13 @@ import type { GitHubRepo } from "@/types";
 import { personalInfo } from "@/data/personal";
 
 const PRIORITY_REPOS = [
-  "gps-police",
-  "GPS-Police-Personnel-Management-System",
   "mwc-member-registry",
-  "MWC-Member-Registry",
-  "aer",
   "fhm-meet",
-  "FHM-Meet",
   "digi-receipt",
-  "Digi-Receipt",
-  "lambda-lms",
-  "Lambda-LMS",
-  "lambda-annotate",
   "Lambda-Annotate",
+  "gps-staff-management-system",
+  "portfolio",
+  "PayVoice",
 ];
 
 export async function fetchGitHubRepos(): Promise<GitHubRepo[]> {

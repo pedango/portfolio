@@ -1,32 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Container } from "@/components/ui/container";
 
 interface AnimatedSectionProps {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
   id?: string;
-  delay?: number;
+  "aria-labelledby"?: string;
+  bare?: boolean;
 }
+
+const ease = [0.21, 0.47, 0.32, 0.98] as const;
 
 export function AnimatedSection({
   children,
   className,
   id,
-  delay = 0,
+  "aria-labelledby": ariaLabelledBy,
+  bare = false,
 }: AnimatedSectionProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <motion.section
       id={id}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      aria-labelledby={ariaLabelledBy}
+      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+      whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={cn("pt-14 pb-10 sm:pt-16 sm:pb-12", className)}
+      transition={{ duration: 0.5, ease }}
+      className={cn("py-[72px] md:py-[112px]", className)}
     >
-      <div className="mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8">{children}</div>
+      {bare ? children : <Container>{children}</Container>}
     </motion.section>
   );
 }

@@ -1,80 +1,121 @@
 import Link from "next/link";
-import { ExternalLink, GitBranch, Star } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { fetchGitHubRepos, formatRelativeDate } from "@/lib/github";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SectionHeader } from "@/components/ui/section-header";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { personalInfo } from "@/data/personal";
 
+const languageColors: Record<string, string> = {
+  TypeScript: "#3178c6",
+  JavaScript: "#f1e05a",
+  Dart: "#00b4ab",
+  Python: "#3572a5",
+  HTML: "#e34c26",
+  CSS: "#563d7c",
+};
+
 export async function GitHubSection() {
-  const repos = await fetchGitHubRepos();
+  let repos: Awaited<ReturnType<typeof fetchGitHubRepos>> = [];
+  let errored = false;
+
+  try {
+    repos = await fetchGitHubRepos();
+  } catch {
+    errored = true;
+  }
 
   return (
-    <AnimatedSection id="github" className="bg-muted/30">
-      <SectionHeading
-        title="Open Source"
-        subtitle="Repositories and contributions on GitHub"
-      />
+    <AnimatedSection id="github" aria-labelledby="github-heading">
+      <div className="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+        <SectionHeader
+          index="06 / GITHUB"
+          title="Open Source"
+          subtitle="Repositories and contributions on GitHub"
+          id="github-heading"
+          className="mb-0"
+        />
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="font-mono text-sm text-fg-muted">
+            @{personalInfo.githubUsername}
+          </span>
+          <Button asChild variant="outline" size="sm">
+            <Link
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View All Repositories
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </Link>
+          </Button>
+        </div>
+      </div>
 
-      <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {repos.map((repo) => (
-          <Card
-            key={repo.id}
-            className="flex flex-col transition-all duration-300 hover:border-primary/30 hover:shadow-lg"
-          >
-            <CardHeader className="p-6 pb-3">
-              <div className="flex items-start justify-between gap-2">
-                <CardTitle className="text-lg">
-                  <Link
-                    href={repo.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 transition-colors hover:text-primary"
-                  >
-                    <GitBranch className="h-4 w-4 shrink-0" />
-                    {repo.name}
-                  </Link>
-                </CardTitle>
-                <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground" />
-              </div>
-              {repo.description && (
-                <p className="line-clamp-2 text-sm text-muted-foreground">
-                  {repo.description}
-                </p>
-              )}
-            </CardHeader>
-            <CardContent className="mt-auto px-6 pb-6 pt-0">
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
-                {repo.language && (
-                  <Badge variant="tech" className="shrink-0">
-                    {repo.language}
-                  </Badge>
+      {errored || repos.length === 0 ? (
+        <Card>
+          <CardContent className="p-6 text-sm text-fg-muted">
+            Repositories could not be loaded right now.{" "}
+            <Link
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:text-accent-hover"
+            >
+              Visit @{personalInfo.githubUsername} on GitHub
+            </Link>
+            .
+          </CardContent>
+        </Card>
+      ) : (
+        <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {repos.map((repo) => (
+            <Card
+              key={repo.id}
+              className="flex h-full flex-col transition-colors duration-150 hover:border-border-strong"
+            >
+              <CardContent className="flex h-full flex-col p-6">
+                <Link
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-mono text-sm text-fg transition-colors hover:text-accent"
+                >
+                  {repo.name}
+                  <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />
+                </Link>
+                {repo.description ? (
+                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-fg-muted">
+                    {repo.description}
+                  </p>
+                ) : (
+                  <p className="mt-2 text-sm text-fg-subtle">No description</p>
                 )}
-                <span className="inline-flex shrink-0 items-center gap-1 leading-none">
-                  <Star className="h-3.5 w-3.5" />
-                  {repo.stargazers_count}
-                </span>
-                <span className="leading-none">{formatRelativeDate(repo.updated_at)}</span>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      <div className="mt-10 text-center">
-        <Button asChild variant="outline" size="lg">
-          <Link
-            href={personalInfo.github}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View All Repositories
-            <ExternalLink className="h-4 w-4" />
-          </Link>
-        </Button>
-      </div>
+                <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-2 pt-5 text-xs text-fg-subtle">
+                  {repo.language ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <span
+                        className="h-2 w-2 rounded-full"
+                        style={{
+                          backgroundColor:
+                            languageColors[repo.language] ?? "#6b7280",
+                        }}
+                        aria-hidden="true"
+                      />
+                      {repo.language}
+                    </span>
+                  ) : null}
+                  {repo.stargazers_count > 0 ? (
+                    <span>{repo.stargazers_count} stars</span>
+                  ) : null}
+                  <span>{formatRelativeDate(repo.updated_at)}</span>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
     </AnimatedSection>
   );
 }
