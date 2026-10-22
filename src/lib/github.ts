@@ -30,6 +30,7 @@ export async function fetchGitHubRepos(): Promise<GitHubRepo[]> {
     const repos: GitHubRepo[] = await response.json();
 
     return repos
+      .filter((repo) => Boolean(repo.description?.trim()))
       .sort((a, b) => {
         const aPriority = PRIORITY_REPOS.findIndex((name) =>
           a.name.toLowerCase().includes(name.toLowerCase())

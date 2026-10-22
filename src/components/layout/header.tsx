@@ -11,10 +11,10 @@ import { Container } from "@/components/ui/container";
 
 const navLinks = [
   { href: "#about", label: "About", id: "about" },
-  { href: "#skills", label: "Skills", id: "skills" },
-  { href: "#projects", label: "Projects", id: "projects" },
+  { href: "#skills", label: "Stack", id: "skills" },
+  { href: "#projects", label: "Work", id: "projects" },
   { href: "#experience", label: "Experience", id: "experience" },
-  { href: "#github", label: "GitHub", id: "github" },
+  { href: "#github", label: "Code", id: "github" },
   { href: "#contact", label: "Contact", id: "contact" },
 ];
 
@@ -108,16 +108,16 @@ export function Header() {
         >
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-base font-semibold tracking-tight text-fg"
+            className="inline-flex min-w-0 max-w-[58%] items-center gap-2 text-sm font-semibold tracking-tight text-fg sm:max-w-none sm:text-base"
           >
             <span
               className="h-2 w-2 shrink-0 rounded-full bg-accent"
               aria-hidden="true"
             />
-            Edem Peter
+            <span className="truncate">{personalInfo.name}</span>
           </Link>
 
-          <div className="hidden items-center gap-1 lg:flex">
+          <div className="hidden items-center gap-0.5 xl:gap-1 lg:flex">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
@@ -126,7 +126,7 @@ export function Header() {
                   href={link.href}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
-                    "relative rounded-[8px] px-3 py-2 text-sm font-medium text-fg-muted transition-colors hover:text-fg",
+                    "relative rounded-[8px] px-2.5 py-2 text-sm font-medium text-fg-muted transition-colors hover:text-fg xl:px-3",
                     isActive && "text-fg"
                   )}
                 >
@@ -174,10 +174,10 @@ export function Header() {
           aria-modal="true"
           aria-label="Mobile navigation"
         >
-          <div className="flex h-16 items-center justify-between border-b border-border px-6">
-            <span className="inline-flex items-center gap-2 text-base font-semibold">
-              <span className="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
-              Edem Peter
+          <div className="flex h-16 items-center justify-between border-b border-border px-5 sm:px-6">
+            <span className="inline-flex min-w-0 items-center gap-2 pr-3 text-sm font-semibold sm:text-base">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+              <span className="truncate">{personalInfo.name}</span>
             </span>
             <Button
               ref={closeButtonRef}
@@ -189,7 +189,7 @@ export function Header() {
               <X className="h-5 w-5" />
             </Button>
           </div>
-          <div className="flex flex-col gap-1 px-6 py-6">
+          <div className="flex flex-col gap-1 px-5 py-5 sm:px-6 sm:py-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -200,7 +200,7 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <Button asChild variant="outline" className="mt-4">
+            <Button asChild variant="outline" className="mt-3 w-full">
               <a
                 href={personalInfo.cvPath}
                 download

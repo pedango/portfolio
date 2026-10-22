@@ -31,7 +31,10 @@ export function AnimatedSection({
       whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, ease }}
-      className={cn("py-[72px] md:py-[112px]", className)}
+      className={cn(
+        "py-[var(--space-section-y)]",
+        className
+      )}
     >
       {bare ? children : <Container>{children}</Container>}
     </motion.section>

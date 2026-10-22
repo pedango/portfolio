@@ -28,13 +28,13 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const categoryOrder = [
-  "Programming Languages",
+  "Languages",
   "Frontend",
   "Backend",
-  "Databases",
+  "Data",
   "Testing & Security",
   "PDF & Annotation",
-  "Tools & Platforms",
+  "Platforms",
 ];
 
 const ease = [0.21, 0.47, 0.32, 0.98] as const;
@@ -44,20 +44,17 @@ export function Skills() {
   const technical = categoryOrder
     .map((title) => skillCategories.find((c) => c.title === title))
     .filter(Boolean);
-  const professional = skillCategories.find(
-    (c) => c.title === "Professional Skills"
-  );
 
   return (
     <AnimatedSection id="skills" aria-labelledby="skills-heading">
       <SectionHeader
-        index="02 / SKILLS"
-        title="Technical Skills"
-        subtitle="Technologies and competencies across the full development lifecycle"
+        index="02 / STACK"
+        title="Stack"
+        subtitle="Technologies used across shipped products"
         id="skills-heading"
       />
 
-      <div className="grid auto-rows-fr grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid auto-rows-fr grid-cols-1 items-stretch gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
         {technical.map((category, index) => {
           if (!category) return null;
           const Icon = iconMap[category.icon] || Code2;
@@ -68,20 +65,20 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: index * 0.06, ease }}
-              className="h-full"
+              className="h-full min-w-0"
             >
               <Card className="group h-full transition-colors duration-150 hover:border-border-strong">
-                <CardContent className="flex h-full flex-col p-6">
+                <CardContent className="flex h-full flex-col p-5 sm:p-6">
                   <div className="flex items-center gap-3">
                     <Icon
-                      className="h-5 w-5 text-fg-muted transition-colors duration-150 group-hover:text-accent"
+                      className="h-5 w-5 shrink-0 text-fg-muted transition-colors duration-150 group-hover:text-accent"
                       aria-hidden="true"
                     />
-                    <h3 className="font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-fg">
+                    <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-fg sm:text-[12px]">
                       {category.title}
                     </h3>
                   </div>
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="mt-3 flex flex-wrap gap-2 sm:mt-4">
                     {category.skills.map((skill) => (
                       <Chip key={skill}>{skill}</Chip>
                     ))}
@@ -92,17 +89,6 @@ export function Skills() {
           );
         })}
       </div>
-
-      {professional ? (
-        <p className="mt-8 border-t border-border pt-6 text-sm leading-7 text-fg-muted">
-          <span className="font-mono text-[12px] uppercase tracking-[0.08em] text-fg-subtle">
-            Professional Skills
-          </span>
-          <span className="mt-2 block text-fg">
-            {professional.skills.join(" · ")}
-          </span>
-        </p>
-      ) : null}
     </AnimatedSection>
   );
 }

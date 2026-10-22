@@ -18,6 +18,9 @@
   --radius-card: 12px;
   --radius-control: 8px;
   --radius-chip: 6px;
+  --space-section-y: 4rem;
+  --space-header-mb: 2rem;
+  --space-block: 1.5rem;
 
   /* Compatibility aliases for lingering shadcn-style utilities */
   --background: var(--bg);
@@ -78,8 +81,8 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-ring: var(--ring);
 
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-jetbrains-mono);
+  --font-sans: var(--font-ibm-plex-sans);
+  --font-mono: var(--font-ibm-plex-mono);
 
   --radius-card: var(--radius-card);
   --radius-control: var(--radius-control);
@@ -98,7 +101,6 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans), system-ui, sans-serif;
-  font-feature-settings: "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -139,7 +141,20 @@ body {
 }
 
 section[id] {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 88px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --space-section-y: 5rem;
+    --space-header-mb: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --space-section-y: 6rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

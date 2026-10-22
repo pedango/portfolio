@@ -9,12 +9,12 @@ function GitHubSkeleton() {
   return (
     <section
       id="github"
-      className="py-[72px] md:py-[112px]"
+      className="py-[var(--space-section-y)]"
       aria-busy="true"
       aria-label="Loading repositories"
     >
-      <div className="mx-auto w-full max-w-[1120px] px-6 md:px-8">
-        <div className="mb-10 h-8 w-48 animate-pulse rounded bg-surface-2" />
+      <div className="mx-auto w-full max-w-[1120px] px-5 sm:px-6 lg:px-8">
+        <div className="mb-[var(--space-header-mb)] h-8 w-48 animate-pulse rounded bg-surface-2" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, index) => (
             <div

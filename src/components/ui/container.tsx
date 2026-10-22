@@ -14,7 +14,7 @@ export function Container({
   return (
     <Comp
       className={cn(
-        "mx-auto w-full max-w-[1120px] px-6 md:px-8",
+        "mx-auto w-full max-w-[1120px] px-5 sm:px-6 lg:px-8",
         className
       )}
     >

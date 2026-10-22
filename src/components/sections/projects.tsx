@@ -54,7 +54,7 @@ function MetricsRow({
     <dl
       className={cn(
         "grid gap-3 border-t border-border pt-4",
-        compact ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-3"
+        "grid-cols-1 sm:grid-cols-3"
       )}
     >
       {metrics.map((metric) => (
@@ -137,7 +137,7 @@ function FeaturedCard({
           reverse && "lg:[&>*:first-child]:order-2"
         )}
       >
-        <div className="relative aspect-video border-b border-border lg:aspect-auto lg:min-h-[320px] lg:border-b-0 lg:border-r lg:border-border">
+        <div className="relative aspect-video border-b border-border lg:aspect-auto lg:min-h-[300px] xl:min-h-[320px] lg:border-b-0 lg:border-r lg:border-border">
           <Image
             src={project.image}
             alt={`${project.title} screenshot`}
@@ -146,8 +146,8 @@ function FeaturedCard({
             sizes="(max-width: 1024px) 100vw, 55vw"
           />
         </div>
-        <div className="flex flex-col justify-center p-6 md:p-8">
-          <div className="flex flex-wrap items-center gap-3">
+        <div className="flex min-w-0 flex-col justify-center p-5 sm:p-6 lg:p-8">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <ProjectMeta project={project} />
             {project.featured ? (
               <span className="inline-flex items-center gap-1 font-mono text-[12px] uppercase tracking-[0.08em] text-fg-subtle">
@@ -156,14 +156,14 @@ function FeaturedCard({
               </span>
             ) : null}
           </div>
-          <h3 className="mt-3 text-xl font-semibold leading-7 tracking-tight text-fg">
+          <h3 className="mt-3 text-lg font-semibold leading-7 tracking-tight text-fg sm:text-xl">
             {project.title}
           </h3>
-          <p className="mt-3 text-base leading-7 text-fg-muted">
+          <p className="mt-2 text-[15px] leading-6 text-fg-muted sm:mt-3 sm:text-base sm:leading-7">
             {project.shortDescription}
           </p>
           {project.metrics && project.metrics.length > 0 ? (
-            <div className="mt-5">
+            <div className="mt-4 sm:mt-5">
               <MetricsRow metrics={project.metrics} />
             </div>
           ) : null}
@@ -203,9 +203,9 @@ function StandardCard({
           sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex min-w-0 flex-1 flex-col p-5 sm:p-6">
         <ProjectMeta project={project} />
-        <h3 className="mt-2 text-xl font-semibold leading-7 tracking-tight text-fg">
+        <h3 className="mt-2 text-lg font-semibold leading-7 tracking-tight text-fg sm:text-xl">
           {project.title}
         </h3>
         <p className="mt-2 line-clamp-2 text-sm leading-6 text-fg-muted">
@@ -219,7 +219,7 @@ function StandardCard({
         <div className="mt-4">
           <StackLine technologies={project.technologies} />
         </div>
-        <div className="mt-auto">
+        <div className="mt-auto pt-2">
           <ProjectLinks project={project} />
         </div>
       </div>
@@ -234,13 +234,13 @@ export function Projects() {
   return (
     <AnimatedSection id="projects" aria-labelledby="projects-heading">
       <SectionHeader
-        index="03 / PROJECTS"
-        title="Featured Projects"
+        index="03 / WORK"
+        title="Selected work"
         subtitle="Real-world applications built for education, community, and public service"
         id="projects-heading"
       />
 
-      <div className="space-y-6">
+      <div className="space-y-5 sm:space-y-6">
         {featured.map((project, index) => (
           <FeaturedCard
             key={project.slug}
@@ -252,11 +252,11 @@ export function Projects() {
       </div>
 
       {more.length > 0 ? (
-        <div className="mt-14">
-          <p className="mb-6 font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-fg-subtle">
-            More Projects
+        <div className="mt-10 sm:mt-12">
+          <p className="mb-4 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-fg-subtle sm:mb-5 sm:text-[12px]">
+            More projects
           </p>
-          <div className="grid auto-rows-fr gap-4 sm:grid-cols-2">
+          <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 sm:gap-5">
             {more.map((project, index) => (
               <StandardCard
                 key={project.slug}

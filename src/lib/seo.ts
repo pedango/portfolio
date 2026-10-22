@@ -2,9 +2,9 @@ import { personalInfo } from "@/data/personal";
 
 export const siteConfig = {
   name: personalInfo.name,
-  title: `${personalInfo.name} | Full Stack Developer Portfolio`,
+  title: `${personalInfo.name} | Full-Stack Software Developer`,
   description:
-    "Portfolio of Dango Edem Peter — Full-Stack Software Developer building educational technology, secure web applications, and community-focused software solutions.",
+    "Dango Edem Peter — Full-Stack Software Developer building educational technology, secure web applications, and community-focused software solutions.",
   url: personalInfo.siteUrl,
   ogImage: "/opengraph-image",
   keywords: [

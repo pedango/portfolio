@@ -9,10 +9,10 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border py-10">
+    <footer className="border-t border-border py-8 sm:py-10">
       <Container>
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div>
+        <div className="flex flex-col gap-5 sm:gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="min-w-0">
             <p className="text-sm font-semibold text-fg">{personalInfo.name}</p>
             <p className="mt-1 text-sm text-fg-muted">{personalInfo.location}</p>
           </div>
@@ -35,16 +35,15 @@ export function Footer() {
 
           <Link
             href="#hero"
-            className="inline-flex items-center gap-1.5 text-sm text-fg-muted transition-colors hover:text-accent"
+            className="inline-flex items-center gap-1.5 self-start text-sm text-fg-muted transition-colors hover:text-accent md:self-auto"
           >
             Back to top
             <ArrowUp className="h-3.5 w-3.5" />
           </Link>
         </div>
 
-        <p className="mt-8 font-mono text-[12px] leading-5 text-fg-subtle">
-          © {currentYear} {personalInfo.name}. Built with Next.js, TypeScript &
-          Tailwind CSS.
+        <p className="mt-6 border-t border-border pt-5 font-mono text-[12px] leading-5 text-fg-subtle sm:mt-8 sm:pt-6">
+          © {currentYear} {personalInfo.name}
         </p>
       </Container>
     </footer>

@@ -26,17 +26,21 @@ export async function GitHubSection() {
     errored = true;
   }
 
+  const visibleRepos = repos
+    .filter((repo) => Boolean(repo.description?.trim()))
+    .slice(0, 6);
+
   return (
     <AnimatedSection id="github" aria-labelledby="github-heading">
-      <div className="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mb-[var(--space-header-mb)] flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
         <SectionHeader
-          index="06 / GITHUB"
-          title="Open Source"
-          subtitle="Repositories and contributions on GitHub"
+          index="05 / CODE"
+          title="Repositories"
+          subtitle="Selected public work on GitHub"
           id="github-heading"
-          className="mb-0"
+          className="mb-0 min-w-0 flex-1"
         />
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex shrink-0 flex-wrap items-center gap-3">
           <span className="font-mono text-sm text-fg-muted">
             @{personalInfo.githubUsername}
           </span>
@@ -46,14 +50,14 @@ export async function GitHubSection() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              View All Repositories
+              View all
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
           </Button>
         </div>
       </div>
 
-      {errored || repos.length === 0 ? (
+      {errored || visibleRepos.length === 0 ? (
         <Card>
           <CardContent className="p-6 text-sm text-fg-muted">
             Repositories could not be loaded right now.{" "}
@@ -70,7 +74,7 @@ export async function GitHubSection() {
         </Card>
       ) : (
         <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {repos.map((repo) => (
+          {visibleRepos.map((repo) => (
             <Card
               key={repo.id}
               className="flex h-full flex-col transition-colors duration-150 hover:border-border-strong"
@@ -85,13 +89,9 @@ export async function GitHubSection() {
                   {repo.name}
                   <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />
                 </Link>
-                {repo.description ? (
-                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-fg-muted">
-                    {repo.description}
-                  </p>
-                ) : (
-                  <p className="mt-2 text-sm text-fg-subtle">No description</p>
-                )}
+                <p className="mt-2 line-clamp-2 text-sm leading-6 text-fg-muted">
+                  {repo.description}
+                </p>
                 <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-2 pt-5 text-xs text-fg-subtle">
                   {repo.language ? (
                     <span className="inline-flex items-center gap-1.5">
