@@ -32,7 +32,7 @@ export function AnimatedSection({
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, ease }}
       className={cn(
-        "py-[var(--space-section-y)]",
+        "scroll-mt-24 py-20 md:py-28",
         className
       )}
     >

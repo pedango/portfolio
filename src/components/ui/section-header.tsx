@@ -19,19 +19,19 @@ export function SectionHeader({
 
   return (
     <header
-      className={cn("mb-[var(--space-header-mb)]", className)}
+      className={cn("mb-12", className)}
     >
-      <p className="font-mono text-[11px] font-medium uppercase leading-4 tracking-[0.08em] text-accent sm:text-[12px]">
+      <p className="font-mono text-[13px] font-medium uppercase tracking-widest text-accent">
         {index}
       </p>
       <h2
         id={headingId}
-        className="mt-2 text-left text-[28px] font-semibold leading-9 tracking-[-0.02em] text-fg sm:mt-3 sm:text-[32px] sm:leading-[38px]"
+        className="mt-4 text-left text-3xl font-semibold tracking-tight text-fg md:text-4xl"
       >
         {title}
       </h2>
       {subtitle ? (
-        <p className="mt-2 max-w-[60ch] text-[15px] leading-6 text-fg-muted sm:mt-3 sm:text-base sm:leading-7">
+        <p className="mt-4 max-w-prose text-base leading-7 text-fg-muted">
           {subtitle}
         </p>
       ) : null}

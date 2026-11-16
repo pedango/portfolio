@@ -10,11 +10,9 @@ import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Container } from "@/components/ui/container";
 
 const navLinks = [
-  { href: "#about", label: "About", id: "about" },
-  { href: "#skills", label: "Stack", id: "skills" },
   { href: "#projects", label: "Work", id: "projects" },
+  { href: "#about", label: "About", id: "about" },
   { href: "#experience", label: "Experience", id: "experience" },
-  { href: "#github", label: "Code", id: "github" },
   { href: "#contact", label: "Contact", id: "contact" },
 ];
 
@@ -34,22 +32,39 @@ export function Header() {
 
   useEffect(() => {
     const ids = navLinks.map((link) => link.id);
-    const observers: IntersectionObserver[] = [];
+    const ratios = new Map<string, number>();
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((element): element is HTMLElement => Boolean(element));
 
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          ratios.set(
+            entry.target.id,
+            entry.isIntersecting ? entry.intersectionRatio : 0
+          );
+        }
 
-    return () => observers.forEach((observer) => observer.disconnect());
+        let next = "";
+        let best = 0;
+        for (const id of ids) {
+          const ratio = ratios.get(id) ?? 0;
+          if (ratio > best) {
+            best = ratio;
+            next = id;
+          }
+        }
+        setActiveSection(next);
+      },
+      {
+        rootMargin: "-96px 0px -40% 0px",
+        threshold: [0, 0.15, 0.35, 0.6, 0.9],
+      }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -111,7 +126,7 @@ export function Header() {
             className="inline-flex min-w-0 max-w-[58%] items-center gap-2 text-sm font-semibold tracking-tight text-fg sm:max-w-none sm:text-base"
           >
             <span
-              className="h-2 w-2 shrink-0 rounded-full bg-accent"
+              className="h-2 w-2 shrink-0 rounded-lg bg-accent"
               aria-hidden="true"
             />
             <span className="truncate">{personalInfo.name}</span>
@@ -126,8 +141,8 @@ export function Header() {
                   href={link.href}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
-                    "relative rounded-[8px] px-2.5 py-2 text-sm font-medium text-fg-muted transition-colors hover:text-fg xl:px-3",
-                    isActive && "text-fg"
+                    "relative rounded-lg px-3 py-2 text-sm font-medium text-fg-muted transition-colors hover:text-fg",
+                    isActive && "text-accent"
                   )}
                 >
                   {link.label}
@@ -174,9 +189,9 @@ export function Header() {
           aria-modal="true"
           aria-label="Mobile navigation"
         >
-          <div className="flex h-16 items-center justify-between border-b border-border px-5 sm:px-6">
+          <div className="flex h-16 items-center justify-between border-b border-border px-6">
             <span className="inline-flex min-w-0 items-center gap-2 pr-3 text-sm font-semibold sm:text-base">
-              <span className="h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+              <span className="h-2 w-2 shrink-0 rounded-lg bg-accent" aria-hidden="true" />
               <span className="truncate">{personalInfo.name}</span>
             </span>
             <Button
@@ -189,17 +204,24 @@ export function Header() {
               <X className="h-5 w-5" />
             </Button>
           </div>
-          <div className="flex flex-col gap-1 px-5 py-5 sm:px-6 sm:py-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsMobileOpen(false)}
-                className="rounded-[8px] px-4 py-3 text-base font-medium text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg"
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="flex flex-col gap-2 px-6 py-6">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? "true" : undefined}
+                  onClick={() => setIsMobileOpen(false)}
+                  className={cn(
+                    "rounded-lg px-4 py-3 text-base font-medium text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg",
+                    isActive && "text-accent"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <Button asChild variant="outline" className="mt-3 w-full">
               <a
                 href={personalInfo.cvPath}

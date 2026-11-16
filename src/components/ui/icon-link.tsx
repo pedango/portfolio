@@ -23,7 +23,7 @@ export function IconLink({
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
       className={cn(
-        "inline-flex h-10 w-10 min-h-10 min-w-10 items-center justify-center rounded-[8px] border border-border text-fg-muted transition-colors duration-150 hover:border-border-strong hover:text-accent",
+        "inline-flex h-10 w-10 min-h-10 min-w-10 items-center justify-center rounded-lg border border-border text-fg-muted transition-colors duration-150 hover:border-[color-mix(in_srgb,var(--accent)_40%,transparent)] hover:text-accent",
         className
       )}
     >

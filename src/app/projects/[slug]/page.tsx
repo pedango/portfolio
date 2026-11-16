@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Play, Star } from "lucide-react";
@@ -7,6 +6,7 @@ import { getGoogleDriveEmbedUrl } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Separator } from "@/components/ui/separator";
+import { ProjectMedia } from "@/components/ui/project-media";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -73,7 +73,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   ].filter(Boolean);
 
   return (
-    <article className="min-h-screen pt-24 pb-[var(--space-section-y)]">
+    <article className="min-h-screen scroll-mt-24 pt-24 pb-20 md:pb-28">
       <Container className="max-w-3xl">
         <nav className="mb-8 font-mono text-[12px] uppercase tracking-[0.08em] text-fg-subtle">
           <Link href="/#projects" className="transition-colors hover:text-accent">
@@ -115,16 +115,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <Separator className="my-8" />
         )}
 
-        <div className="relative mt-8 aspect-video overflow-hidden rounded-[12px] border border-border">
-          <Image
+        {project.image ? (
+          <ProjectMedia
             src={project.image}
-            alt={`${project.title} screenshot`}
-            fill
-            className="object-cover object-top"
+            alt={project.imageAlt ?? `${project.title} screenshot`}
+            width={project.imageWidth ?? 1600}
+            height={project.imageHeight ?? 1000}
             priority
             sizes="(max-width: 768px) 100vw, 768px"
+            className="mt-8"
           />
-        </div>
+        ) : null}
 
         <p className="mt-6 font-mono text-[12px] leading-5 text-fg-subtle">
           {project.technologies.join(" · ")}
@@ -209,18 +210,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               {galleryScreenshots.map((screenshot) => (
-                <div
+                <ProjectMedia
                   key={screenshot.src}
-                  className="relative aspect-video overflow-hidden rounded-[8px] border border-border"
-                >
-                  <Image
-                    src={screenshot.src}
-                    alt={screenshot.alt}
-                    fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 640px) 100vw, 384px"
-                  />
-                </div>
+                  src={screenshot.src}
+                  alt={screenshot.alt}
+                  sizes="(max-width: 640px) 100vw, 384px"
+                />
               ))}
             </div>
           </section>
@@ -232,14 +227,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <Play className="h-3.5 w-3.5" aria-hidden="true" />
               Demo
             </h2>
-            <div className="relative aspect-video overflow-hidden rounded-[12px] border border-border bg-surface-2">
-              <iframe
-                src={getGoogleDriveEmbedUrl(project.demoVideoUrl)}
-                title={`${project.title} demo video`}
-                allow="autoplay; fullscreen"
-                allowFullScreen
-                className="absolute inset-0 h-full w-full"
-              />
+            <div className="rounded-2xl border border-border bg-surface p-3">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
+                <iframe
+                  src={getGoogleDriveEmbedUrl(project.demoVideoUrl)}
+                  title={`${project.title} demo video`}
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full"
+                />
+              </div>
             </div>
             <Button asChild variant="outline" size="sm" className="mt-3">
               <Link

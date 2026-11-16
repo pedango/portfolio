@@ -16,11 +16,15 @@ export interface Project {
   githubUrl?: string;
   liveUrl?: string;
   featured?: boolean;
-  status?: "Ongoing";
+  status?: "Ongoing" | "Demo";
   role?: string;
   year?: string;
   metrics?: ProjectMetric[];
   image: string;
+  imageSm?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   screenshots?: { src: string; alt: string }[];
   demoVideoUrl?: string;
   architecture: string[];

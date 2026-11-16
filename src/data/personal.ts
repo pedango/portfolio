@@ -21,7 +21,7 @@ export const personalInfo = {
 
 export const aboutContent = {
   paragraphs: [
-    "Full-stack developer who builds and ships production web applications with Next.js, TypeScript, Prisma, and PostgreSQL. Built HealTrac, an elective surgery case-tracking platform used by two UPMC hospitals in Pennsylvania, USA, and I own features end to end from architecture through delivery. Experience across real-time video, PDF tooling, and role-based systems, with working knowledge of performance testing (JMeter), end-to-end testing (Playwright), and security vulnerability assessment (Snyk). Focused on community-impact products.",
+    "Full-stack developer who builds and ships production web applications with Next.js, TypeScript, Prisma, and PostgreSQL. Built HealTrac, an elective surgery case-tracking platform used by two UPMC hospitals in Pennsylvania, and I own features end to end from architecture through delivery. The work covers real-time video, PDF tooling, and role-based systems, with working knowledge of JMeter, Playwright, and Snyk, and a focus on community-impact products.",
   ],
   highlights: [
     "Project Coordination",

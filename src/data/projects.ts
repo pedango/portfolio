@@ -1,7 +1,7 @@
 import type { Project } from "@/types";
 
-/** Selected: GPS → MWC → HealTrac → AER. The rest render under More projects. */
-export const projects: Project[] = [
+/** Source records. Homepage order is applied in the Work section. */
+const projectRecords: Project[] = [
   {
     slug: "gps-police-management",
     title: "Ghana Police Service Staff Management System",
@@ -321,11 +321,12 @@ export const projects: Project[] = [
     featured: true,
     role: "Full-Stack Developer",
     year: "2026",
+    status: "Demo",
     liveUrl: "https://plusbuy-trustpay.vercel.app",
     metrics: [
-      { value: "Demo", label: "Live, not in real use" },
-      { value: "Escrow", label: "Held until item received" },
+      { value: "Escrow", label: "Held until received" },
       { value: "MoMo", label: "Simulated mobile money" },
+      { value: "1.5%", label: "Fee on release" },
     ],
     description:
       "A live demonstration of a shirt shop and an escrow gateway. PlusBuy is not used by real shoppers. TrustPay holds a simulated mobile-money payment and releases it only after the buyer confirms delivery.",
@@ -799,7 +800,84 @@ export const projects: Project[] = [
       "Solo projects benefit from delivering the core marking flow before extras",
     ],
   },
+  {
+    slug: "payvoice",
+    title: "PayVoice",
+    type: "Independent Project",
+    role: "Developer",
+    description:
+      "SIP and WebRTC voice bridge in Go. Phone calls and browser calls share one audio mix, G.711 end to end.",
+    shortDescription:
+      "SIP and WebRTC voice bridge. Phone calls and browser calls share one audio mix.",
+    problem:
+      "Phone calls and browser calls needed to meet in one audio mix.",
+    solution:
+      "A Go bridge connects SIP phone audio and WebRTC browser audio, G.711 end to end.",
+    contributions: [
+      "Built a Go SIP to WebRTC voice bridge so phone calls and browser calls share one audio mix",
+    ],
+    technologies: ["Go", "WebRTC", "SIP"],
+    githubUrl: "https://github.com/pedango/PayVoice",
+    image: "",
+    architecture: ["Go process bridging SIP and WebRTC audio, G.711 end to end"],
+    features: ["Phone calls and browser calls in one audio mix"],
+    lessonsLearned: [
+      "A voice bridge can stay one audio path when both sides speak G.711",
+    ],
+  },
 ];
+
+const framedShots: Record<
+  string,
+  { image: string; imageSm: string; imageAlt: string }
+> = {
+  healtrac: {
+    image: "/assets/projects/healtrac.webp",
+    imageSm: "/assets/projects/healtrac-sm.webp",
+    imageAlt: "Scheduler dashboard with active surgery cases and status filters",
+  },
+  "gps-police-management": {
+    image: "/assets/projects/gps-police-management.webp",
+    imageSm: "/assets/projects/gps-police-management-sm.webp",
+    imageAlt: "Regional overview dashboard with staff statistics and department filters",
+  },
+  "mwc-member-registry": {
+    image: "/assets/projects/mwc-member-registry.webp",
+    imageSm: "/assets/projects/mwc-member-registry-sm.webp",
+    imageAlt: "MWC dashboard with membership stats, recent activity, and quick actions",
+  },
+  "plusbuy-trustpay": {
+    image: "/assets/projects/plusbuy-trustpay.webp",
+    imageSm: "/assets/projects/plusbuy-trustpay-sm.webp",
+    imageAlt: "PlusBuy homepage with Shop Smart, Pay Safe and featured products",
+  },
+  aer: {
+    image: "/assets/projects/aer.webp",
+    imageSm: "/assets/projects/aer-sm.webp",
+    imageAlt: "AER homepage hero with economic research headline and call to action",
+  },
+  "fhm-meet": {
+    image: "/assets/projects/fhm-meet.webp",
+    imageSm: "/assets/projects/fhm-meet-sm.webp",
+    imageAlt: "FHM-Meet dashboard with new meeting, join, and recent meetings",
+  },
+  "digi-receipt": {
+    image: "/assets/projects/digi-receipt.webp",
+    imageSm: "/assets/projects/digi-receipt-sm.webp",
+    imageAlt: "Digi-Receipt home with Record Donation, Donor List, and Event Details tabs",
+  },
+  "lambda-lms": {
+    image: "/assets/projects/lambda-lms.webp",
+    imageSm: "/assets/projects/lambda-lms-sm.webp",
+    imageAlt: "Lambda LMS landing page with hero and call to action",
+  },
+};
+
+export const projects: Project[] = projectRecords.map((project) => {
+  const shot = framedShots[project.slug];
+  if (!shot) return project;
+  return { ...project, ...shot, imageWidth: 1600, imageHeight: 1000 };
+});
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug);

@@ -46,16 +46,11 @@ export function Contact() {
 
   return (
     <AnimatedSection id="contact" aria-labelledby="contact-heading">
-      <SectionHeader
-        index="06 / CONTACT"
-        title="Contact"
-        subtitle="Open to opportunities in software engineering, app development, and educational technology"
-        id="contact-heading"
-      />
+      <SectionHeader index="05 / CONTACT" title="Contact" id="contact-heading" />
 
       <div className="grid items-stretch gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
         <div className="min-w-0">
-          <p className="max-w-[60ch] text-[17px] leading-7 text-fg sm:text-lg sm:leading-[30px]">
+          <p className="max-w-prose text-base leading-7 text-fg-muted">
             I am actively seeking roles in software engineering, full-stack
             development, app development coordination, and graduate technology
             programs. Whether you have an opportunity or just want to connect, I
@@ -69,7 +64,7 @@ export function Contact() {
                 <>
                   <Icon className="mt-0.5 h-4 w-4 shrink-0 text-fg-subtle" />
                   <div className="min-w-0">
-                    <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-fg-subtle sm:text-[12px]">
+                    <p className="font-mono text-[13px] uppercase tracking-widest text-fg-muted">
                       {link.label}
                     </p>
                     <p className="mt-1 text-sm text-fg">{link.value}</p>
@@ -103,8 +98,8 @@ export function Contact() {
         </div>
 
         <Card className="h-full">
-          <CardContent className="flex h-full flex-col justify-center p-5 sm:p-6 lg:p-8">
-            <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-fg-subtle sm:text-[12px]">
+          <CardContent className="flex h-full flex-col justify-center p-6">
+            <p className="font-mono text-[13px] uppercase tracking-widest text-fg-muted">
               Email
             </p>
             <a
@@ -113,11 +108,7 @@ export function Contact() {
             >
               {personalInfo.email}
             </a>
-            <p className="mt-3 text-sm leading-6 text-fg-muted">
-              Prefer email? Reach me directly — I read and reply from this inbox.
-            </p>
-
-            <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button asChild size="lg" className="w-full sm:flex-1">
                 <a href={`mailto:${personalInfo.email}`}>
                   <Mail className="h-4 w-4" />

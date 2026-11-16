@@ -1,186 +1,151 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { projects } from "@/data/projects";
-import type { Project } from "@/types";
+import type { GitHubRepo, Project } from "@/types";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { SectionHeader } from "@/components/ui/section-header";
-import { cn } from "@/lib/utils";
+import { ProjectMedia } from "@/components/ui/project-media";
+import { Badge } from "@/components/ui/badge";
+import { RepositoryList } from "@/components/sections/github";
 
 const ease = [0.21, 0.47, 0.32, 0.98] as const;
+const leadSlug = "healtrac";
+const gridSlugs = ["gps-police-management", "mwc-member-registry", "plusbuy-trustpay"];
+const moreSlugs = ["aer", "fhm-meet", "digi-receipt", "lambda-lms", "payvoice"];
 
-function highlightLine(project: Project) {
-  if (project.metrics && project.metrics.length > 0) {
-    return project.metrics
-      .map((metric) => `${metric.value} ${metric.label}`)
-      .join(" | ");
-  }
-  return project.shortDescription;
+function bySlug(slug: string) {
+  return projects.find((project) => project.slug === slug);
 }
 
-const selectedCover: Record<string, string> = {
-  "gps-police-management": "/assets/projects/gps-police/login.png",
-  "mwc-member-registry": "/assets/projects/mwc-member-registry/login.jpg",
-  healtrac: "/assets/projects/healtrac/login.png",
-  aer: "/assets/projects/aer/home.png",
-  "plusbuy-trustpay": "/assets/projects/plusbuy/home.png",
-};
-
-function ProductStage({ project }: { project: Project }) {
-  const src = selectedCover[project.slug] ?? project.image;
-
-  return (
-    <div className="relative h-full min-h-[220px] overflow-hidden sm:min-h-[280px] lg:min-h-full">
-      <Image
-        src={src}
-        alt=""
-        fill
-        className={cn(
-          "object-cover",
-          project.slug === "aer" ? "object-top" : "object-center"
-        )}
-        sizes="(max-width: 1024px) 100vw, 50vw"
-      />
-    </div>
-  );
-}
-
-function WorkBanner({ project, index }: { project: Project; index: number }) {
+function WorkCard({
+  project,
+  index,
+  priority = false,
+}: {
+  project: Project;
+  index: number;
+  priority?: boolean;
+}) {
   const reduceMotion = useReducedMotion();
-  const reverse = index % 2 === 1;
+  const stats = (project.metrics ?? []).slice(0, 3);
 
   return (
     <motion.article
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, delay: Math.min(index, 2) * 0.05, ease }}
-      className="overflow-hidden rounded-[28px] bg-surface shadow-[0_12px_40px_-16px_rgba(15,18,22,0.18)]"
-    >
-      <Link
-        href={`/projects/${project.slug}`}
-        aria-label={`Learn more about ${project.title}`}
-        className={cn(
-          "group grid focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
-          reverse
-            ? "lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]"
-            : "lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]"
-        )}
-      >
-        <div
-          className={cn(
-            "flex flex-col justify-center px-7 py-10 sm:px-12 sm:py-14 lg:px-14 xl:px-16",
-            reverse && "lg:order-2"
-          )}
-        >
-          <h3 className="max-w-[12em] text-[28px] font-bold leading-[1.12] tracking-[-0.03em] text-fg sm:text-[34px]">
-            {project.title}
-          </h3>
-          <p className="mt-4 max-w-[28ch] text-[16px] font-medium leading-snug text-fg sm:mt-5 sm:text-[18px] sm:leading-[1.45]">
-            {highlightLine(project)}
-          </p>
-          <span className="mt-8 inline-flex items-center gap-0.5 text-[14px] text-fg sm:mt-10">
-            Learn More
-            <ChevronRight
-              className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-0.5"
-              aria-hidden="true"
-            />
-          </span>
-        </div>
-        <div className={cn("h-full", reverse && "lg:order-1")}>
-          <ProductStage project={project} />
-        </div>
-      </Link>
-    </motion.article>
-  );
-}
-
-function MoreCard({ project, index }: { project: Project; index: number }) {
-  const reduceMotion = useReducedMotion();
-
-  return (
-    <motion.article
-      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.45, delay: index * 0.05, ease }}
+      transition={{ duration: 0.5, delay: reduceMotion ? 0 : Math.min(index, 2) * 0.05, ease }}
       className="h-full"
     >
       <Link
         href={`/projects/${project.slug}`}
-        aria-label={`Learn more about ${project.title}`}
-        className="group flex h-full flex-col overflow-hidden rounded-[12px] border border-border bg-surface transition-colors duration-150 hover:border-border-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-4 transition-colors duration-150 hover:border-[color-mix(in_srgb,var(--accent)_40%,transparent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:p-6"
       >
-        <div className="relative aspect-[16/10] border-b border-border bg-surface-2">
-          <Image
-            src={project.image}
-            alt=""
-            fill
-            className="object-cover object-top"
-            sizes="(max-width: 640px) 100vw, 50vw"
-          />
-        </div>
-        <div className="flex flex-1 flex-col p-5">
-          <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-fg-subtle">
-            {[project.role, project.year].filter(Boolean).join(" · ")}
-          </p>
-          <h3 className="mt-2 text-lg font-semibold leading-7 tracking-tight text-fg">
+        <ProjectMedia
+          src={project.imageSm || project.image}
+          alt={project.imageAlt || `${project.title} screenshot`}
+          width={project.imageSm ? 800 : project.imageWidth ?? 1600}
+          height={project.imageSm ? 500 : project.imageHeight ?? 1000}
+          priority={priority}
+          sizes={priority ? "(max-width: 1024px) 100vw, 1100px" : "(max-width: 1024px) 100vw, 360px"}
+        />
+
+        <div className="mt-6 flex flex-1 flex-col">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[13px] text-fg-muted">
+            <span>{[project.role, project.year].filter(Boolean).join(" · ")}</span>
+            {project.status === "Demo" ? <Badge>Demo</Badge> : null}
+          </div>
+          <h3 className="mt-2 text-xl font-semibold tracking-tight text-fg">
             {project.title}
           </h3>
-          <p className="mt-2 line-clamp-2 text-sm leading-6 text-fg-muted">
+          <p className="mt-2 line-clamp-2 text-base leading-7 text-fg-muted">
             {project.shortDescription}
           </p>
-          <span className="mt-4 inline-flex items-center gap-0.5 text-[14px] text-fg">
-            Learn More
-            <ChevronRight
-              className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-0.5"
-              aria-hidden="true"
-            />
-          </span>
+
+          <div className="mt-auto pt-8">
+            {stats.length > 0 ? (
+              <dl className="grid grid-cols-3 gap-4">
+                {stats.map((metric) => (
+                  <div key={`${metric.value}-${metric.label}`}>
+                    <dt className="text-2xl font-semibold tracking-tight text-fg">
+                      {metric.value}
+                    </dt>
+                    <dd className="mt-1 text-[13px] leading-5 text-fg-muted">
+                      {metric.label}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
+            <p className="mt-6 text-sm text-accent">View case study →</p>
+          </div>
         </div>
       </Link>
     </motion.article>
   );
 }
 
-const moreProjectSlugs = ["aer", "fhm-meet", "digi-receipt", "lambda-lms"];
-
-export function Projects() {
-  const selected = projects.filter((project) => project.featured);
-  const more = moreProjectSlugs
-    .map((slug) => projects.find((project) => project.slug === slug))
-    .filter((project): project is (typeof projects)[number] => Boolean(project));
+export function Projects({ repos }: { repos: GitHubRepo[] }) {
+  const lead = bySlug(leadSlug);
+  const grid = gridSlugs
+    .map(bySlug)
+    .filter((project): project is Project => Boolean(project));
+  const more = moreSlugs
+    .map(bySlug)
+    .filter((project): project is Project => Boolean(project));
 
   return (
     <AnimatedSection id="projects" aria-labelledby="projects-heading">
       <SectionHeader
-        index="03 / WORK"
+        index="01 / WORK"
         title="Selected work"
         subtitle="Real-world applications built for education, community, and public service"
         id="projects-heading"
       />
 
-      <div className="space-y-4 sm:space-y-5">
-        {selected.map((project, index) => (
-          <WorkBanner key={project.slug} project={project} index={index} />
-        ))}
+      <div className="space-y-4">
+        {lead ? <WorkCard project={lead} index={0} priority /> : null}
+        <div className="grid items-stretch gap-4 lg:grid-cols-3">
+          {grid.map((project, index) => (
+            <WorkCard key={project.slug} project={project} index={index + 1} />
+          ))}
+        </div>
       </div>
 
       {more.length > 0 ? (
-        <div className="mt-14 sm:mt-16">
-          <p className="font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-fg-subtle">
+        <div className="mt-16">
+          <h3 className="font-mono text-[13px] uppercase tracking-widest text-fg-muted">
             More projects
-          </p>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            {more.map((project, index) => (
-              <MoreCard key={project.slug} project={project} index={index} />
+          </h3>
+          <ul className="mt-4 divide-y divide-border border-y border-border">
+            {more.map((project) => (
+              <li key={project.slug}>
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="flex items-center gap-6 py-4 text-fg transition-colors hover:text-accent"
+                >
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-medium">{project.title}</span>
+                    <span className="mt-1 line-clamp-1 block text-base leading-7 text-fg-muted">
+                      {project.shortDescription}
+                    </span>
+                  </span>
+                  {project.year ? (
+                    <span className="shrink-0 font-mono text-[13px] text-fg-muted">
+                      {project.year}
+                    </span>
+                  ) : null}
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       ) : null}
+
+      <RepositoryList repos={repos} />
     </AnimatedSection>
   );
 }
