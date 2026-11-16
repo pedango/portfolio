@@ -11,7 +11,8 @@ const focusAreas = [
 ];
 
 export function About() {
-  const [lead, ...rest] = aboutContent.paragraphs;
+  const paragraphs: readonly string[] = aboutContent.paragraphs;
+  const [lead, ...rest] = paragraphs;
 
   return (
     <AnimatedSection id="about" aria-labelledby="about-heading">
