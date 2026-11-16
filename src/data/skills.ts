@@ -27,11 +27,6 @@ export const skillCategories: SkillCategory[] = [
     skills: ["Playwright", "Apache JMeter", "Snyk"],
   },
   {
-    title: "PDF & Annotation",
-    icon: "FileText",
-    skills: ["Fabric.js", "PDF.js", "pdf-lib", "jsPDF"],
-  },
-  {
     title: "Platforms",
     icon: "Wrench",
     skills: ["Vercel", "Clerk", "Cloudinary", "Upstash Redis", "Zustand"],

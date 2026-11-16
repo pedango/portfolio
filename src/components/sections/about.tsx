@@ -4,10 +4,10 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { Card, CardContent } from "@/components/ui/card";
 
 const focusAreas = [
-  "Full-stack web applications",
-  "Educational technology platforms",
-  "Public-service and community systems",
-  "Realtime communication (WebRTC)",
+  "Production web applications",
+  "Role-based systems",
+  "Real-time video and PDF tooling",
+  "Community-impact products",
 ];
 
 export function About() {
@@ -18,7 +18,7 @@ export function About() {
       <SectionHeader
         index="01 / ABOUT"
         title="Profile"
-        subtitle="Computer Science graduate building web apps, EdTech, and community-impact systems"
+        subtitle="Production web applications with Next.js, TypeScript, Prisma, and PostgreSQL"
         id="about-heading"
       />
 

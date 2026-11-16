@@ -1,6 +1,6 @@
 import type { Project } from "@/types";
 
-/** Display order: GPS → MWC → AER → FHM-Meet → Digi-Receipt → Lambda LMS → Lambda Annotate */
+/** Selected: GPS → MWC → HealTrac → AER. The rest render under More projects. */
 export const projects: Project[] = [
   {
     slug: "gps-police-management",
@@ -189,6 +189,206 @@ export const projects: Project[] = [
       "Bulk import succeeds when template download and validation catch bad rows early",
       "QR check-in removes friction for door volunteers compared with manual roll call",
       "Webcam capture must degrade gracefully when devices or permissions are unavailable",
+    ],
+  },
+  {
+    slug: "healtrac",
+    title: "HealTrac",
+    type: "Independent Project",
+    featured: true,
+    role: "Full-Stack Developer",
+    year: "2026",
+    liveUrl: "https://www.healtrac.com",
+    metrics: [
+      { value: "2", label: "UPMC hospitals" },
+      { value: "5", label: "Role dashboards" },
+      { value: "Live", label: "Case tracking in Pennsylvania" },
+    ],
+    description:
+      "Elective surgery case-tracking platform used by UPMC Community General and UPMC Harrisburg. Schedulers, vendor representatives, sterile processing teams, and offsite clinics follow the same case together instead of coordinating by phone and spreadsheet.",
+    shortDescription:
+      "Shared surgery case workspace for schedulers, vendors, sterile processing, and offsite clinics.",
+    problem:
+      "Elective surgery teams were coordinating cases across schedulers, vendor representatives, sterile processing, and offsite clinics with phone calls and spreadsheets, so no one shared a single view of where a case stood.",
+    solution:
+      "Built a shared web workspace where each role updates only the step they own, and every other role sees that change on their own board. Cases move from vendor confirmation through sterile processing to completion, each with a unique five-digit reference, plus a separate pickup workflow for dirty instruments.",
+    contributions: [
+      "Designed and built a shared web workspace for elective surgery cases that lets schedulers, vendor representatives, sterile processing teams, and offsite clinics follow the same case together",
+      "Deployed for live use at two hospitals in Pennsylvania: UPMC Community General and UPMC Harrisburg",
+      "Built role-specific dashboards where each user updates only the step they own and every other role sees the change on their own board",
+      "Implemented stage-based case tracking from vendor confirmation through sterile processing to completion, with a unique five-digit reference searchable by every role",
+      "Added an offsite pickup workflow for dirty instruments",
+      "Developed super-admin tools for user invitations, role and account management, and system-wide case and pickup oversight",
+    ],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Vercel",
+    ],
+    image: "/assets/projects/healtrac/scheduler-dashboard.png",
+    screenshots: [
+      {
+        src: "/assets/projects/healtrac/scheduler-dashboard.png",
+        alt: "Scheduler dashboard with active surgery cases and status filters",
+      },
+      {
+        src: "/assets/projects/healtrac/scheduler-create.png",
+        alt: "Create case form for procedure, surgeon, facility, and vendor",
+      },
+      {
+        src: "/assets/projects/healtrac/scheduler-reports.png",
+        alt: "Scheduler reports for surgery cases",
+      },
+      {
+        src: "/assets/projects/healtrac/vendor-dashboard.png",
+        alt: "Vendor dashboard with cases waiting for confirmation",
+      },
+      {
+        src: "/assets/projects/healtrac/vendor-case.png",
+        alt: "Vendor case detail used to confirm a surgery case",
+      },
+      {
+        src: "/assets/projects/healtrac/vendor-reports.png",
+        alt: "Vendor reports for assigned surgery cases",
+      },
+      {
+        src: "/assets/projects/healtrac/spd-or-cases.png",
+        alt: "Sterile processing board with acknowledged, received, in progress, and ready columns",
+      },
+      {
+        src: "/assets/projects/healtrac/spd-completed.png",
+        alt: "Sterile processing completed cases list",
+      },
+      {
+        src: "/assets/projects/healtrac/spd-offsites.png",
+        alt: "Sterile processing offsite pickup queue",
+      },
+      {
+        src: "/assets/projects/healtrac/offsite-dashboard.png",
+        alt: "Offsite clinic dashboard tracking instrument pickup requests",
+      },
+      {
+        src: "/assets/projects/healtrac/offsite-new-pickup.png",
+        alt: "New offsite pickup form for dirty instruments",
+      },
+      {
+        src: "/assets/projects/healtrac/offsite-reports.png",
+        alt: "Offsite clinic pickup reports",
+      },
+      {
+        src: "/assets/projects/healtrac/admin-dashboard.png",
+        alt: "Super-admin overview of cases, users, and the sterile processing pipeline",
+      },
+      {
+        src: "/assets/projects/healtrac/admin-cases.png",
+        alt: "Super-admin view of cases across hospitals",
+      },
+      {
+        src: "/assets/projects/healtrac/admin-reports.png",
+        alt: "Super-admin reports across hospitals",
+      },
+    ],
+    architecture: [
+      "Next.js application with a separate dashboard for each role",
+      "PostgreSQL with Prisma for cases, pickups, users, and organizations",
+      "JWT session authentication with role-restricted routes",
+      "Stage-based case workflow from vendor confirmation through sterile processing to completion",
+      "Five-digit HealTrac reference searchable from every role",
+      "Deployed on Vercel for UPMC Community General and UPMC Harrisburg",
+    ],
+    features: [
+      "Scheduler case creation and tracking",
+      "Vendor confirmation of assigned cases",
+      "Sterile processing board from acknowledgment through ready and complete",
+      "Offsite pickup requests for dirty instruments",
+      "Super-admin invitations, role management, and cross-hospital oversight",
+      "Search by a unique five-digit case reference",
+    ],
+    lessonsLearned: [
+      "A shared case board works when each role can update only the step they own",
+      "Replacing phone calls and spreadsheets depends on one reference number everyone can search",
+      "Hospital workflows need a separate path for offsite instrument pickups, not only operating-room cases",
+      "Super-admin tools have to cover invitations and oversight without putting every control on the clinical boards",
+    ],
+  },
+  {
+    slug: "plusbuy-trustpay",
+    title: "PlusBuy + TrustPay",
+    type: "Independent Project",
+    featured: true,
+    role: "Full-Stack Developer",
+    year: "2026",
+    liveUrl: "https://plusbuy-trustpay.vercel.app",
+    metrics: [
+      { value: "Demo", label: "Live, not in real use" },
+      { value: "Escrow", label: "Held until item received" },
+      { value: "MoMo", label: "Simulated mobile money" },
+    ],
+    description:
+      "A live demonstration of a shirt shop and an escrow gateway. PlusBuy is not used by real shoppers. TrustPay holds a simulated mobile-money payment and releases it only after the buyer confirms delivery.",
+    shortDescription:
+      "Live demonstration of a shop and escrow gateway. No real shoppers, and no real money moves.",
+    problem:
+      "The demo needed to show how a buyer could pay for an item while the seller only receives the money after delivery, without connecting a real wallet or taking real orders.",
+    solution:
+      "Built one Next.js app with two bounded contexts: PlusBuy for the shop, and TrustPay for escrow. Checkout simulates MTN MoMo, holds the payment, and releases the merchant's balance only after the buyer marks the item received. The shop talks to TrustPay through an HTTP client and signed webhooks, not shared tables. The site is deployed for demonstration and is not used as a store.",
+    contributions: [
+      "Built PlusBuy as a demonstration shop, with checkout and a merchant handoff to a rider, and no real customers",
+      "Built TrustPay, a simulated escrow gateway that holds mobile-money payments until delivery is confirmed",
+      "Modeled the hold, release, refund, and fee as ledger entries so the merchant balance stays reconcilable",
+      "Kept the shop and the payment gateway in separate boundaries, connected only by an API client and signed webhooks",
+      "Added buyer, merchant, and TrustPay admin views, including a ledger integrity check",
+    ],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "Zod",
+      "Vercel",
+    ],
+    image: "/assets/projects/plusbuy/home.png",
+    screenshots: [
+      {
+        src: "/assets/projects/plusbuy/home.png",
+        alt: "PlusBuy homepage with Shop Smart, Pay Safe and featured products",
+      },
+      {
+        src: "/assets/projects/plusbuy/login.png",
+        alt: "PlusBuy sign-in for buyer, merchant, and TrustPay admin",
+      },
+      {
+        src: "/assets/projects/plusbuy/products.png",
+        alt: "PlusBuy product catalog",
+      },
+      {
+        src: "/assets/projects/plusbuy/merchant.png",
+        alt: "Merchant dashboard with escrow holds, available balance, and recent orders",
+      },
+    ],
+    architecture: [
+      "One Next.js app and one Postgres database, split into PlusBuy shop tables and TrustPay ledger tables",
+      "The shop reaches TrustPay only through lib/trustpay-client.ts",
+      "TrustPay notifies the shop with HMAC-signed webhooks",
+      "Mobile money sits behind a provider interface; the demo uses a simulator, not a live wallet",
+      "Buyer, merchant, and TrustPay admin sessions are separate roles on the same deployment",
+    ],
+    features: [
+      "Storefront with cart and checkout",
+      "Simulated MTN MoMo approval, decline, and wrong PIN",
+      "Escrow hold until the buyer clicks Item received",
+      "Merchant shipment, balance, and payout views",
+      "TrustPay admin ledger integrity checks",
+      "Full refund with no fee when an order is cancelled before shipment",
+    ],
+    lessonsLearned: [
+      "Escrow stays trustworthy when the shop cannot write the ledger itself",
+      "A simulated mobile-money provider is enough to prove the hold and release flow before a live wallet is wired",
+      "Release, refund, and fee have to land as ledger rows or the merchant balance cannot be checked",
+      "Item received is the moment the seller gets paid, so that action has to belong to the buyer who placed the order",
     ],
   },
   {

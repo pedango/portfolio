@@ -4,7 +4,7 @@ export const siteConfig = {
   name: personalInfo.name,
   title: `${personalInfo.name} | Full-Stack Software Developer`,
   description:
-    "Dango Edem Peter — Full-Stack Software Developer building educational technology, secure web applications, and community-focused software solutions.",
+    "Dango Edem Peter — Full-stack developer who builds and ships production web applications with Next.js, TypeScript, Prisma, and PostgreSQL.",
   url: personalInfo.siteUrl,
   ogImage: "/opengraph-image",
   keywords: [

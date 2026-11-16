@@ -7,7 +7,6 @@ import {
   Database,
   Shield,
   Wrench,
-  FileText,
   LucideIcon,
 } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
@@ -24,7 +23,6 @@ const iconMap: Record<string, LucideIcon> = {
   Database,
   Shield,
   Wrench,
-  FileText,
 };
 
 const categoryOrder = [
@@ -33,7 +31,6 @@ const categoryOrder = [
   "Backend",
   "Data",
   "Testing & Security",
-  "PDF & Annotation",
   "Platforms",
 ];
 
